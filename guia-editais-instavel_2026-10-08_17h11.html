@@ -1,0 +1,1193 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title data-app="">Guia de Editais</title>
+<meta data-app="" name="description" content="Instável Studio — guia e controle de projetos de teatro para editais">
+<link data-app="" rel="preconnect" href="https://fonts.googleapis.com">
+<link data-app="" rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link data-app="" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=Familjen+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style data-app="">
+:root{
+  --coral:#F14E53; --violeta:#8B5FBF; --creme:#F5F0E1; --ameixa:#2E1A33;
+  --azul:#1E4FBF; --tungstenio:#FFC857; --offwhite:#FFF8F0;
+  --bg:#F5F0E1; --surface:#FFF8F0; --surface-2:#EDE6D3; --ink:#2E1A33; --ink-soft:#5E4A63;
+  --line:#DCD2BC; --accent:#F14E53; --accent-ink:#FFF8F0; --accent-2:#8B5FBF; --link:#1E4FBF;
+  --ok:#2F7D4F; --ok-bg:#DDEFD9; --warn:#8A5A00; --warn-bg:#FFEDC2; --bad:#B3262B; --bad-bg:#FBDADB;
+  --info-bg:#E8DFF4; --shadow:0 1px 0 rgba(46,26,51,.08),0 6px 18px rgba(46,26,51,.06);
+  --display:"Bricolage Grotesque","Familjen Grotesk",system-ui,sans-serif;
+  --text:"Familjen Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#1F1123; --surface:#2E1A33; --surface-2:#3A2440; --ink:#F5F0E1; --ink-soft:#C9BCC9;
+    --line:#4A3350; --accent:#F25C61; --accent-ink:#1F1123; --accent-2:#B08BDD; --link:#8FB0FF;
+    --ok:#8FD9A6; --ok-bg:#1F3A2A; --warn:#FFD47A; --warn-bg:#3D3016; --bad:#FF9599; --bad-bg:#4A1E24;
+    --info-bg:#3B2752; --shadow:0 1px 0 rgba(0,0,0,.3),0 8px 22px rgba(0,0,0,.25); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1F1123; --surface:#2E1A33; --surface-2:#3A2440; --ink:#F5F0E1; --ink-soft:#C9BCC9;
+  --line:#4A3350; --accent:#F25C61; --accent-ink:#1F1123; --accent-2:#B08BDD; --link:#8FB0FF;
+  --ok:#8FD9A6; --ok-bg:#1F3A2A; --warn:#FFD47A; --warn-bg:#3D3016; --bad:#FF9599; --bad-bg:#4A1E24;
+  --info-bg:#3B2752; --shadow:0 1px 0 rgba(0,0,0,.3),0 8px 22px rgba(0,0,0,.25); color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--text);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:var(--link)}
+h1,h2,h3{font-family:var(--display);line-height:1.1;margin:0 0 .4em;letter-spacing:-.01em}
+h2{font-size:clamp(1.5rem,3.4vw,2.1rem)} h3{font-size:1.2rem}
+p{margin:.3em 0 .8em}
+small,.muted{color:var(--ink-soft)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+
+/* Top bar */
+.top{background:var(--ameixa);color:var(--creme);padding:14px 0 0;position:sticky;top:0;z-index:20}
+.top .row1{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:baseline;gap:10px;margin-right:auto;flex-wrap:wrap}
+.brand b{font-family:var(--display);font-size:1.45rem;letter-spacing:-.02em}
+.brand b i{font-style:normal;color:var(--coral)}
+.brand span{font-size:.8rem;opacity:.75;text-transform:lowercase}
+.projbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.projbar select{background:var(--offwhite);color:var(--ameixa);border:0;border-radius:999px;padding:8px 34px 8px 14px;font:600 .95rem var(--text);max-width:220px}
+.btn{appearance:none;border:1.5px solid transparent;border-radius:999px;padding:8px 16px;font:600 .92rem var(--text);cursor:pointer;background:var(--accent);color:var(--accent-ink);display:inline-flex;align-items:center;gap:6px;text-decoration:none;white-space:nowrap}
+.btn:hover{filter:brightness(1.05)}
+.btn:focus-visible,.tab:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--tungstenio);outline-offset:2px}
+.btn.ghost{background:transparent;color:inherit;border-color:currentColor}
+.btn.soft{background:var(--surface-2);color:var(--ink)}
+.btn.violet{background:var(--accent-2);color:#fff}
+.btn.sm{padding:5px 11px;font-size:.84rem}
+.btn.danger{background:transparent;color:var(--bad);border-color:var(--bad)}
+.top .btn.ghost{color:var(--creme)}
+.tabs{display:flex;gap:2px;overflow-x:auto;margin-top:12px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{background:transparent;border:0;color:var(--creme);opacity:.75;padding:10px 14px;font:600 .92rem var(--text);cursor:pointer;border-radius:12px 12px 0 0;white-space:nowrap}
+.tab .n{display:inline-block;font-size:.72rem;opacity:.7;margin-right:5px}
+.tab[aria-selected="true"]{background:var(--bg);color:var(--ink);opacity:1}
+.savebadge{font-size:.72rem;opacity:.8;align-self:center;display:flex;align-items:center;gap:6px}
+.savebadge::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--tungstenio)}
+.savebadge.ok::before{background:#7BD88F}
+
+main{padding:24px 0 80px}
+.lead{font-size:1.05rem;color:var(--ink-soft);max-width:70ch}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
+.card+.card{margin-top:14px}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.stack>*+*{margin-top:14px}
+.section-title{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:26px 0 10px}
+.section-title h3{margin:0}
+.pill{display:inline-flex;align-items:center;gap:4px;font-size:.78rem;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--surface-2);color:var(--ink);white-space:nowrap}
+.pill.ok{background:var(--ok-bg);color:var(--ok)} .pill.warn{background:var(--warn-bg);color:var(--warn)}
+.pill.bad{background:var(--bad-bg);color:var(--bad)} .pill.info{background:var(--info-bg);color:var(--accent-2)}
+.pill.coral{background:var(--accent);color:var(--accent-ink)}
+.callout{border-radius:14px;padding:12px 14px;background:var(--info-bg);border-left:4px solid var(--accent-2);margin:10px 0}
+.callout.warn{background:var(--warn-bg);border-color:var(--tungstenio);color:var(--ink)}
+.callout.bad{background:var(--bad-bg);border-color:var(--bad)}
+.callout.ok{background:var(--ok-bg);border-color:var(--ok)}
+.callout p:last-child{margin-bottom:0}
+
+/* Forms */
+label.f{display:block;font-size:.82rem;font-weight:600;color:var(--ink-soft);margin-bottom:10px}
+label.f>span{display:block;margin-bottom:4px}
+input[type=text],input[type=number],input[type=date],input[type=email],input[type=url],select,textarea{width:100%;background:var(--bg);color:var(--ink);border:1.5px solid var(--line);border-radius:10px;padding:9px 11px;font:400 .97rem var(--text)}
+textarea{min-height:110px;resize:vertical;line-height:1.55}
+input[type=checkbox]{width:20px;height:20px;accent-color:var(--accent);vertical-align:middle}
+.frow{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+
+/* Painel */
+.deadline{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px dashed var(--line)}
+.deadline:last-child{border-bottom:0}
+.dbox{flex:0 0 58px;text-align:center;border-radius:12px;padding:6px 0;background:var(--surface-2);font-family:var(--display);line-height:1}
+.dbox b{display:block;font-size:1.35rem} .dbox small{font-size:.7rem;text-transform:uppercase;font-family:var(--text);font-weight:600}
+.dbox.urg{background:var(--accent);color:var(--accent-ink)} .dbox.urg small{color:inherit}
+.dbox.late{background:var(--ameixa);color:var(--creme)} .dbox.late small{color:inherit}
+.deadline .what{flex:1;min-width:0}
+.deadline .what b{display:block;font-weight:600}
+.projcard{cursor:pointer;transition:transform .12s}
+.projcard:hover{transform:translateY(-2px)}
+.projcard .bar{height:8px;background:var(--surface-2);border-radius:99px;overflow:hidden;margin:8px 0 4px}
+.projcard .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--coral),var(--violeta))}
+.kv{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.stripe{height:6px;border-radius:99px;margin:-6px -6px 12px;background:var(--coral)}
+
+/* Steps / rights */
+.steps{counter-reset:s;list-style:none;padding:0;margin:0}
+.steps li{position:relative;padding:0 0 18px 48px}
+.steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:0;width:34px;height:34px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font:800 1rem var(--display)}
+.steps li::after{content:"";position:absolute;left:16px;top:36px;bottom:2px;width:2px;background:var(--line)}
+.steps li:last-child::after{display:none}
+.steps li b{display:block;font-size:1.02rem}
+.status-row{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.status-row:last-child{border-bottom:0}
+.status-row input[type=date]{width:auto}
+.tpl{white-space:pre-wrap;font:400 .9rem/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px;max-height:340px;overflow:auto}
+
+/* Editais */
+.edital h3{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.edital dl{margin:8px 0 0;display:grid;grid-template-columns:110px 1fr;gap:6px 10px;font-size:.92rem}
+.edital dt{font-weight:700;color:var(--ink-soft)} .edital dd{margin:0}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 16px}
+.chip{border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 12px;font:600 .85rem var(--text);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+/* Lists */
+.item{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:var(--shadow)}
+.item+.item{margin-top:12px}
+.item .head{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:8px}
+.empty{text-align:center;padding:34px 16px;border:2px dashed var(--line);border-radius:18px;color:var(--ink-soft)}
+.empty h3{color:var(--ink)}
+
+/* Wizard */
+.wiz{display:grid;grid-template-columns:260px 1fr;gap:18px;align-items:start}
+.wiz nav{position:sticky;top:130px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:10px;max-height:calc(100vh - 150px);overflow:auto}
+.wiz nav button{display:flex;gap:8px;align-items:center;width:100%;text-align:left;background:none;border:0;color:var(--ink);padding:8px 10px;border-radius:10px;font:500 .9rem var(--text);cursor:pointer}
+.wiz nav button:hover{background:var(--surface-2)}
+.wiz nav button[aria-current="step"]{background:var(--ink);color:var(--bg)}
+.wiz nav .dot{flex:0 0 22px;height:22px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-size:.7rem;font-weight:700}
+.wiz nav .dot.done{background:var(--ok);border-color:var(--ok);color:#fff}
+.wiz nav button[aria-current="step"] .dot{border-color:currentColor}
+.progress{height:10px;background:var(--surface-2);border-radius:99px;overflow:hidden;margin:6px 0 14px}
+.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--coral),var(--violeta));transition:width .3s}
+.stepnum{font:800 .85rem var(--display);color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
+.box{border-radius:14px;padding:12px 14px;margin:10px 0}
+.box h4{margin:0 0 4px;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.box.what{background:var(--surface-2)}
+.box.ex{background:var(--info-bg)} .box.ex p{font-style:italic}
+.box.tip{background:var(--warn-bg)}
+.box ul{margin:4px 0 0;padding-left:20px}
+.counter{font-size:.8rem;text-align:right;color:var(--ink-soft);margin-top:4px}
+.counter.low{color:var(--warn)} .counter.good{color:var(--ok)}
+.wiznav{display:flex;justify-content:space-between;gap:10px;margin-top:16px;flex-wrap:wrap}
+.wiz-mobile{display:none}
+
+/* Budget */
+.cat{margin-top:14px}
+.cat .ch{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 14px;background:var(--surface-2);border-radius:12px 12px 0 0;font-weight:700}
+.btable{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-top:0}
+.btable th{font-size:.75rem;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft);text-align:left;padding:8px;border-bottom:1px solid var(--line)}
+.btable td{padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+.btable td input{padding:6px 8px;font-size:.92rem}
+.btable .num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.btable .w-qtd{width:72px}.btable .w-un{width:110px}.btable .w-val{width:130px}
+.totals{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px}
+.stat small{display:block;font-weight:600}
+.stat b{font:800 1.5rem var(--display);font-variant-numeric:tabular-nums}
+.stat.big{background:var(--ameixa);color:var(--creme);border-color:var(--ameixa)} .stat.big small{color:var(--tungstenio)}
+.x{background:none;border:0;color:var(--ink-soft);cursor:pointer;font-size:1.1rem;padding:4px 8px;border-radius:8px}
+.x:hover{background:var(--bad-bg);color:var(--bad)}
+
+.dtable{width:100%;border-collapse:collapse}
+.dtable td,.dtable th{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+.dtable th{font-size:.75rem;text-transform:uppercase;color:var(--ink-soft)}
+.dtable .num{text-align:right;font-variant-numeric:tabular-nums}
+.bk{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+.bk:last-child{border-bottom:0}
+.bk div{flex:1}
+/* Multi-projeto */
+.ptable-wrap{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+.ptable{width:100%;border-collapse:collapse;font-size:.92rem}
+.ptable th{font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft);text-align:left;padding:10px;border-bottom:1px solid var(--line);background:var(--surface-2)}
+.ptable td{padding:10px;border-bottom:1px solid var(--line);vertical-align:middle}
+.ptable tr:last-child td{border-bottom:0}
+.ptable td.pname{border-left:6px solid var(--pc)}
+.ptable a{color:inherit;text-decoration:none} .ptable a:hover b,.ptable a:hover{text-decoration:underline}
+.ptable small{display:block;color:var(--ink-soft);font-size:.78rem}
+.ptable select{padding:5px 8px;font-size:.85rem;min-width:150px}
+.minibar{display:block;height:8px;width:90px;background:var(--surface-2);border-radius:99px;overflow:hidden}
+.minibar i{display:block;height:100%;background:linear-gradient(90deg,var(--coral),var(--violeta))}
+.dotc{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.board{display:grid;grid-template-columns:repeat(5,minmax(170px,1fr));gap:10px;overflow-x:auto;padding-bottom:6px}
+.board .col{background:var(--surface-2);border-radius:14px;padding:10px;min-height:90px}
+.colh{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.kcard{display:block;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--pc);border-radius:10px;padding:8px 10px;margin-bottom:8px;color:var(--ink);text-decoration:none}
+.kcard b{display:block;font-size:.88rem} .kcard small{color:var(--ink-soft);font-size:.76rem}
+.pstrip{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin:-6px 0 18px;padding:10px 12px;background:var(--surface);border:1px solid var(--line);border-radius:14px}
+.pstrip .lbl{font-size:.8rem;font-weight:700;color:var(--ink-soft);margin-right:4px}
+.pchip{border:1.5px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:6px 12px;font:600 .88rem var(--text);cursor:pointer;display:inline-flex;align-items:center}
+.pchip[aria-pressed="true"]{border-color:var(--pc);background:var(--pc);color:#fff}
+.pchip[aria-pressed="true"] .dotc{background:#fff!important}
+.pchip.add{border-style:dashed;color:var(--ink-soft)}
+.swatch{display:inline-block;width:28px;height:28px;border-radius:50%;border:3px solid transparent}
+input[name=cor]:checked+.swatch{border-color:var(--ink)}
+input[name=cor]:focus-visible+.swatch{outline:3px solid var(--tungstenio)}
+@media (max-width:860px){
+  .ptable thead{display:none}
+  .ptable,.ptable tbody,.ptable tr,.ptable td{display:block;width:100%}
+  .ptable tr{border-left:6px solid var(--pc);border-bottom:1px solid var(--line);padding:6px 0}
+  .ptable td{border:0;padding:5px 12px;display:grid;grid-template-columns:110px 1fr;gap:8px;align-items:center}
+  .ptable td.pname{border:0}
+  .ptable td::before{content:attr(data-label);font-size:.72rem;font-weight:700;text-transform:uppercase;color:var(--ink-soft)}
+  .ptable select{min-width:0;width:100%}
+}
+/* Docs */
+.seg{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;overflow:hidden}
+.seg button{border:0;background:transparent;color:var(--ink);padding:6px 12px;font:600 .82rem var(--text);cursor:pointer}
+.seg button[aria-pressed="true"].t{background:var(--ok);color:#fff}
+.seg button[aria-pressed="true"].f{background:var(--accent);color:var(--accent-ink)}
+.seg button[aria-pressed="true"].na{background:var(--ink-soft);color:var(--bg)}
+.docrow{display:grid;grid-template-columns:1fr auto 160px auto;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.docrow:last-child{border-bottom:0}
+
+/* Timeline */
+.gantt{position:relative;overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px}
+.gantt-inner{min-width:720px;position:relative}
+.gmonths{display:flex;border-bottom:1px solid var(--line);font-size:.72rem;font-weight:700;color:var(--ink-soft);text-transform:uppercase}
+.gmonths div{flex:1;padding:4px;border-left:1px solid var(--line)}
+.grow{display:grid;grid-template-columns:180px 1fr;align-items:center;min-height:34px;border-bottom:1px dashed var(--line)}
+.grow .gl{font-size:.85rem;padding-right:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gtrack{position:relative;height:34px}
+.gbar{position:absolute;top:8px;height:18px;border-radius:99px;background:var(--accent-2);min-width:8px}
+.gbar.done{background:var(--ok)} .gbar.late{background:var(--accent)}
+.today{position:absolute;top:0;bottom:0;width:2px;background:var(--tungstenio);z-index:2}
+.cronorow{display:grid;grid-template-columns:auto 1fr 150px 150px auto;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+
+/* Modal */
+.modal{position:fixed;inset:0;background:rgba(31,17,35,.55);display:none;align-items:center;justify-content:center;padding:16px;z-index:50}
+.modal.open{display:flex}
+.modal .card{width:100%;max-width:620px;max-height:90vh;overflow:auto}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%) translateY(120px);background:var(--ameixa);color:var(--creme);padding:10px 18px;border-radius:999px;font-weight:600;transition:transform .25s;z-index:60}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+@media (max-width:860px){
+  .wiz{grid-template-columns:1fr}
+  .wiz nav{display:none}
+  .wiz-mobile{display:block}
+}
+@media (max-width:640px){
+  .brand b{font-size:1.2rem}
+  .projbar{width:100%} .projbar select{flex:1 1 100%;max-width:none}
+  .edital dl{grid-template-columns:1fr} .edital dt{margin-top:4px}
+  .docrow{grid-template-columns:1fr;gap:6px}
+  .cronorow{grid-template-columns:auto 1fr;}
+  .cronorow .cr-d{grid-column:1/-1}
+  .status-row{grid-template-columns:auto 1fr}
+  .status-row input[type=date]{grid-column:2}
+  .btable thead{display:none}
+  .btable,.btable tbody,.btable tr,.btable td{display:block;width:100%}
+  .btable tr{border-bottom:1px solid var(--line);padding:6px 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-areas:"it it it xx" "q o u v" "fo fo s s";gap:6px;align-items:center}
+  .btable td{border:0;padding:2px 6px;min-width:0}
+  .btable td input{min-width:0}
+  .btable td.o{grid-area:o}.btable td.fo{grid-area:fo}.btable td.it{grid-area:it}.btable td.q{grid-area:q}.btable td.u{grid-area:u}.btable td.v{grid-area:v}.btable td.s{grid-area:s;font-size:.85rem}.btable td.xx{grid-area:xx}
+  .btable td[colspan]{grid-column:1/-1}
+  .btable td.q::before,.btable td.o::before,.btable td.u::before,.btable td.v::before,.btable td.fo::before{display:block;font-size:.7rem;font-weight:600;color:var(--ink-soft)}
+  .btable td.q::before{content:"Qtd"}.btable td.o::before{content:"Ocorr."}.btable td.u::before{content:"Unidade"}.btable td.v::before{content:"Valor unit."}.btable td.fo::before{content:"Fonte"}
+  .btable td.xx{text-align:right}
+  .wiz>div{min-width:0}
+  .btable .w-qtd,.btable .w-un,.btable .w-val{width:100%}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body><header class="top" data-app="">
+  <div class="wrap">
+    <div class="row1">
+      <div class="brand"><b>instável<i>.</i></b><span>guia de editais · teatro</span><span class="savebadge ok" id="saveBadge">salvo neste navegador</span></div>
+      <div class="projbar">
+        <select id="projSel" aria-label="Projeto atual"><option value="rumores" selected="">Rumores</option></select>
+        <button class="btn sm" id="btnNew">+ Novo projeto</button>
+        <button class="btn sm ghost" id="btnEdit">Editar ficha</button>
+        <button class="btn sm ghost" id="btnBackup">Backup</button>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist" id="tabs"><button class="tab" role="tab" data-tab="painel" aria-selected="false"><span class="n">1</span>Painel geral</button><button class="tab" role="tab" data-tab="direitos" aria-selected="false"><span class="n">2</span>Direitos autorais</button><button class="tab" role="tab" data-tab="editais" aria-selected="false"><span class="n">3</span>Editais e incentivos</button><button class="tab" role="tab" data-tab="inscricoes" aria-selected="false"><span class="n">4</span>Inscrições</button><button class="tab" role="tab" data-tab="escrever" aria-selected="true"><span class="n">5</span>Escrevendo o projeto</button><button class="tab" role="tab" data-tab="orcamento" aria-selected="false"><span class="n">6</span>Orçamento</button><button class="tab" role="tab" data-tab="documentos" aria-selected="false"><span class="n">7</span>Documentos</button><button class="tab" role="tab" data-tab="cronograma" aria-selected="false"><span class="n">8</span>Cronograma</button></nav>
+  </div>
+</header>
+<main data-app><div class="wrap" id="view"></div></main>
+<div class="modal" id="modal" role="dialog" aria-modal="true" data-app><div class="card" id="modalBody"></div></div>
+<div class="toast" id="toast" data-app></div>
+<script type="application/json" id="dados" data-app>{"savedAt":1791490273812,"projects":{"rumores":{"id":"rumores","nome":"Rumores","obra":"Rumors","autor":"Neil Simon","tipoDireito":"licenciada","editora":"Concord Theatricals","contato":"","fase":"Ideia","cor":"","cidade":"São Paulo","lugares":200,"sessoesPagas":16,"sessoesGratis":2,"temporada":"2º semestre de 2027 (2 temporadas de 4 semanas)","estreia":"","proponente":"PF","primeiraVez":true,"preco":40,"ocupacao":70,"meia":40,"valorProponente":"","criado":"2026-10-06","dist":{"social":10,"patroc":5,"divulg":5,"popular":30,"precoPop":40,"precoLivre":80},"direitos":{"pedido":"","cotacao":"","carta":"","contrato":"","valor":"","moeda":"US$","notas":""},"inscricoes":[{"edital":"Lei Rouanet (federal)","falta":"Carta de intenção da Concord; texto do projeto; orçamento","id":"i_rouanet","prazo":"2026-10-31","resultado":"","status":"preparando","valor":""}],"texto":{"nome":"Rumores — montagem teatral da comédia de Neil Simon, realizada pela Instável Studio, em São Paulo, no segundo semestre de 2027. A proposta prevê 18 apresentações, sendo 16 pagas e 2 gratuitas, em teatro com capacidade aproximada de 200 lugares, com ingresso popular. O projeto busca ampliar o acesso do público à dramaturgia internacional por meio da montagem da obra em português brasileiro, tendo como público-alvo jovens e adultos.","objGeral":"Montar e apresentar a comédia Rumores, de Neil Simon, em São Paulo, promovendo o acesso do público à dramaturgia internacional por meio de uma produção teatral profissional em português brasileiro.","objEsp":"Realizar 16 apresentações da peça Rumores, de Neil Simon, em São Paulo, sendo 14 apresentações com comercialização de ingressos e 2 apresentações gratuitas.\n\nRealizar a montagem da obra em português brasileiro, contemplando as etapas de preparação artística e ensaios necessárias à apresentação do espetáculo.\n\nRealizar 2 ensaios abertos, seguidos de conversa sobre o processo de criação, destinados gratuitamente a estudantes e professores de instituições públicas de ensino, com previsão de atendimento de 320 participantes.\n\nRealizar as 2 apresentações gratuitas com interpretação em Libras.\n\nProduzir registro fotográfico e audiovisual do processo de realização do projeto, incluindo preparação, ensaios, bastidores, apresentações e ações formativas.","justificativa":"A proposta de montagem de Rumores, de Neil Simon, nasce do interesse em apresentar ao público brasileiro uma obra da dramaturgia internacional que utiliza a comédia e a farsa para explorar relações de amizade, casamento, confiança, reputação e poder social. A trama se inicia quando um grupo de amigos se reúne para comemorar o décimo aniversário de casamento de Charley e Myra e encontra uma situação inesperada: Charley está ferido após um disparo, Myra não está na casa e ninguém sabe exatamente como explicar o que aconteceu. A partir desse momento, os personagens passam a criar versões dos fatos para preservar a situação e proteger aqueles que estão envolvidos. \nA construção da peça está diretamente relacionada ao universo social de seus personagens. Trata-se de um grupo pertencente a um círculo de alta sociedade, no qual relações profissionais, patrimônio, posição pública, prestígio e pertencimento a determinados espaços sociais fazem parte da vida cotidiana. Charley ocupa o cargo de vice-prefeito de Nova York; Myra é uma mulher de grande patrimônio; e os personagens circulam por ambientes marcados por relações sociais e profissionais nas quais reputação e imagem pública possuem peso significativo. A própria preocupação com investimentos, impostos, patrimônio e com aquilo que poderá ser descoberto pelos demais faz parte dos conflitos apresentados pela obra. \nEsse contexto é fundamental para a comédia e para o desenvolvimento da trama. O que está em jogo para os personagens não é apenas explicar um acontecimento inesperado, mas controlar as consequências que sua exposição poderia produzir sobre suas relações e sua posição social. A tentativa de preservar aparências faz com que escondam informações, criem versões, transfiram responsabilidades e construam novas histórias para sustentar as anteriores. O resultado é uma escalada de equívocos em que a preocupação com a reputação passa a interferir diretamente na maneira como cada personagem age.\nÉ justamente dessa contradição que a obra extrai sua força cômica: quanto maior a necessidade de manter o controle e preservar determinada imagem, mais descontrolada se torna a situação. A peça permite, por meio do humor, observar comportamentos relacionados à circulação de informações, à formação de julgamentos e à necessidade de administrar aquilo que os outros sabem sobre nós. São mecanismos reconhecíveis na vida social, apresentados por Neil Simon sem abandonar o caráter de entretenimento, ritmo e farsa que estrutura a obra.\nA realização de Rumores no Brasil também apresenta uma particularidade relevante para o projeto. Ao que indica o levantamento realizado para o desenvolvimento da proposta, não foi identificado, até o momento, registro de montagem da obra no Brasil. Caso essa condição seja confirmada no processo de pesquisa e licenciamento, a realização do projeto representará a introdução de uma obra de Neil Simon ainda não identificada no repertório teatral brasileiro, ampliando a diversidade de dramaturgias internacionais apresentadas ao público nacional.\nNesse sentido, a montagem em português brasileiro contribui para ampliar o contato do público com a dramaturgia internacional e com diferentes referências de escrita teatral. A proposta aproxima uma obra de Neil Simon do espectador brasileiro por meio de uma nova tradução e de uma criação cênica realizada no país, promovendo intercâmbio cultural e contribuindo para a diversificação do repertório disponível ao público.\nA própria natureza da obra valoriza a experiência teatral presencial. O humor é construído a partir do ritmo dos diálogos, das reações dos personagens, das entradas e saídas, da movimentação em cena e da atuação conjunta do elenco. A montagem, portanto, cria condições para explorar artisticamente elementos próprios da linguagem teatral e da relação direta entre palco e público.\nO projeto articula essa realização artística a medidas concretas de acesso e formação. Serão realizadas 16 apresentações em São Paulo, sendo 14 com comercialização de ingressos e 2 gratuitas, estas últimas com interpretação em Libras. Antes da temporada, serão realizados 2 ensaios abertos, seguidos de conversa sobre o processo de criação, destinados gratuitamente a estudantes e professores de instituições públicas de ensino. O processo de realização será ainda documentado por meio de registro fotográfico e audiovisual.\nDessa maneira, a proposta busca reunir produção teatral profissional, acesso cultural, formação de público e circulação de dramaturgia internacional em uma mesma iniciativa. Ao levar Rumores ao palco em português brasileiro, o projeto pretende oferecer ao público uma experiência de entretenimento teatral que também possibilite reconhecer, por meio do humor, mecanismos de reputação, aparência, julgamento e circulação de informações presentes nas relações sociais, ao mesmo tempo em que amplia o contato dos espectadores brasileiros com a dramaturgia internacional.\n\nENQUADRAMENTO NA LEI Nº 8.313/1991\nArt. 1º, inciso I: contribuir para facilitar, a todos, os meios para o livre acesso às fontes da cultura e o pleno exercício dos direitos culturais.\nA proposta se relaciona a essa finalidade por meio da realização de uma temporada teatral aberta ao público, incluindo apresentações gratuitas e ações de aproximação e formação destinadas a estudantes e professores de instituições públicas de ensino.\nArt. 1º, inciso VII: desenvolver a consciência internacional e o respeito aos valores culturais de outros povos ou nações.\nA proposta se relaciona a essa finalidade por apresentar ao público brasileiro uma obra da dramaturgia internacional, em português brasileiro, promovendo o contato com uma produção teatral originada em outro contexto cultural e contribuindo para a ampliação do repertório cultural dos espectadores.\nArt. 3º, inciso II, alínea “c”: realização de exposições, festivais de arte, espetáculos de artes cênicas, de música e de folclore.\nO projeto consiste na produção e realização de uma montagem teatral profissional de Rumores, de Neil Simon, com temporada presencial em São Paulo.","sinopse":"Durante uma comemoração de aniversário de casamento, um grupo de amigos da alta sociedade chega à casa de Charley e Myra e encontra o anfitrião ferido por um disparo e a anfitriã desaparecida. Temendo que o episódio se transforme em um escândalo capaz de comprometer a reputação, os relacionamentos e a posição social de todos, eles começam a criar versões dos acontecimentos para esconder o que realmente ocorreu. Com a chegada dos demais convidados e a sucessão de mal-entendidos, cada nova mentira exige outra, transformando uma tentativa de controlar a situação em uma noite de confusões cada vez mais absurdas. \nTom: comédia / farsa.","especificacoes":"Rumores, de Neil Simon, será apresentado como espetáculo teatral de aproximadamente 120 minutos, sem intervalo, com classificação indicativa prevista de 14 anos. A montagem contará com 10 atores em cena, sendo 5 mulheres e 5 homens, sem substitutos, e será concebida para apresentação em espaço teatral equipado, preservando a dinâmica cênica própria da comédia e da farsa.\nCenário: cenário único inspirado no interior da residência de Charley e Myra, estruturado para favorecer a dinâmica de entradas, saídas e deslocamentos rápidos que sustentam o ritmo da farsa. O detalhamento da cenografia e eventuais adaptações ao espaço de apresentação serão definidos pela direção em conjunto com a equipe de cenografia.\nFigurino: figurinos inspirados no universo social dos personagens, valorizando a sofisticação e a caracterização do grupo pertencente à alta sociedade. A concepção final será desenvolvida pela direção em conjunto com a equipe de figurino, em diálogo com a proposta cênica da montagem.\nIluminação: desenho de luz cênico voltado à valorização do espaço, dos deslocamentos, das entradas e saídas e do ritmo da ação, contribuindo também para a criação de atmosferas e transições. A concepção final será elaborada pela direção e pela equipe de iluminação.\nSom: sonorização e efeitos sonoros de apoio à ação cênica, com atenção à inteligibilidade dos diálogos e ao reforço do ritmo e das situações da comédia. A concepção sonora detalhada será desenvolvida durante o processo de montagem.\nDireção: a direção deverá explorar o ritmo, a precisão das reações, a movimentação em cena e a construção progressiva do caos, elementos centrais para a linguagem de farsa presente na obra. As escolhas definitivas de encenação serão consolidadas no processo de criação do espetáculo.\nNota técnica: as definições apresentadas como concepção preliminar serão consolidadas durante a montagem, sem alterar o objeto, o elenco ou as características essenciais previstas nesta proposta.","etapasPre":"Período estimado: 4 meses antes do início dos ensaios.\nA pré-produção compreende o conjunto de atividades necessárias à estruturação legal, administrativa, artística, técnica e operacional do espetáculo antes do início dos ensaios. Para esta proposta, a etapa será organizada em quatro frentes consecutivas, permitindo que o projeto avance da regularização dos direitos e do planejamento inicial para a preparação efetiva da montagem.\n1. Licenciamento e planejamento inicial\nProsseguimento das tratativas de licenciamento de Rumores, de Neil Simon, junto ao detentor dos direitos; definição das condições de utilização da obra e da tradução para o português brasileiro; planejamento geral da produção; organização do cronograma do projeto; levantamento das necessidades iniciais de produção; e pesquisa de espaços compatíveis com a proposta.\n2. Estruturação da equipe e da produção\nContratação e formalização da equipe necessária à realização do projeto; consolidação do elenco, considerando os integrantes já previamente identificados; definição e negociação do espaço de apresentação; planejamento das necessidades técnicas da montagem; e desenvolvimento das ações de comunicação e divulgação do espetáculo pela produtora.\n3. Desenvolvimento artístico e técnico\nDesenvolvimento das concepções e projetos de cenário, figurino, iluminação e sonorização; levantamento e contratação de serviços e fornecedores necessários à montagem; planejamento das medidas de acessibilidade; preparação dos materiais de divulgação; e organização dos procedimentos de produção e logística.\n4. Preparação para os ensaios\nFinalização das contratações e dos preparativos técnicos; aquisição, locação ou produção dos elementos necessários à montagem; organização dos materiais de ensaio; consolidação do cronograma de ensaios e das atividades de produção; e alinhamento operacional da equipe para o início da etapa de ensaios.","etapasProd":"1. Ensaios e desenvolvimento da montagem\nSerão realizadas 10 semanas de ensaios, com frequência de 4 encontros semanais, de aproximadamente 4 horas cada, totalizando uma previsão de 40 ensaios e 160 horas de preparação. O trabalho contemplará preparação do elenco, construção das personagens, desenvolvimento das relações cênicas, ritmo, tempo de reação, movimentação e precisão necessários à linguagem de farsa da obra.\n2. Desenvolvimento paralelo de cenário e figurino\nA concepção e a produção de cenário e figurino ocorrerão em paralelo aos ensaios, permitindo que as soluções visuais sejam desenvolvidas em diálogo com o processo artístico e com a proposta de encenação. Os elementos serão progressivamente incorporados aos ensaios conforme a evolução da montagem.\n3. Preparação técnica e montagem\nAo longo dos ensaios serão desenvolvidas as soluções de iluminação, sonorização e demais necessidades técnicas do espetáculo. Na etapa final, serão realizados a montagem no espaço de apresentação, os testes dos elementos cênicos e os ajustes necessários para a temporada.\n4. Ensaios abertos e ação formativa\nAntes do início da temporada, serão realizados 2 ensaios abertos, seguidos de conversa sobre o processo de criação, destinados gratuitamente a estudantes e professores de instituições públicas de ensino. As atividades ocorrerão no próprio espaço de apresentação e terão como finalidade aproximar os participantes do processo de criação e realização de um espetáculo teatral.\n5. Temporada de apresentações\nSerão realizadas 16 apresentações, sendo 14 com comercialização de ingressos e 2 gratuitas. As 2 apresentações gratuitas contarão com interpretação em Libras. As datas e a organização detalhada da temporada serão consolidadas durante a pré-produção, após a definição e contratação do espaço de apresentação.\n6. Registro do processo\nSerá realizado registro fotográfico e audiovisual do processo de execução, abrangendo preparação, ensaios, montagem, bastidores, apresentações e ações formativas, para documentação e memória do projeto.\n7. Encerramento da execução\nApós a realização da temporada, serão executadas as atividades de desmontagem, organização dos materiais, encerramento operacional da produção e sistematização dos registros do projeto.","etapasPos":"1. Desmontagem e encerramento da estrutura\nAo término da temporada, será realizada a desmontagem do cenário e a organização dos materiais utilizados na montagem, incluindo a devolução de equipamentos e itens locados e o encaminhamento adequado dos materiais que permanecerem sob responsabilidade da produção.\n2. Finalização e organização dos registros\nSerão organizados e finalizados os registros fotográficos e audiovisuais produzidos durante o projeto, abrangendo preparação, ensaios, bastidores, apresentações e ações formativas. O material será sistematizado para documentação e memória da produção.\n3. Sistematização da documentação\nSerão reunidos e organizados os documentos comprobatórios da execução, incluindo registros das apresentações, borderôs, listas de presença das ações formativas, registros de acessibilidade, materiais de divulgação e demais documentos necessários ao encerramento do projeto.\n4. Encerramento administrativo e prestação de contas\nSerá realizada a consolidação das informações financeiras e documentais da execução, com preparação e apresentação da prestação de contas e demais procedimentos de encerramento aplicáveis ao projeto no Salic."},"orcamento":[{"id":"omux3h7jesbf8","cat":"pre","item":"Coordenação de produção","qtd":1,"ocorr":1,"un":"mês","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7jeygkv","cat":"pre","item":"Tradução do texto","qtd":1,"ocorr":1,"un":"serviço","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7je9jqf","cat":"pre","item":"Projeto de cenário","qtd":1,"ocorr":1,"un":"serviço","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7jeew13","cat":"pre","item":"Projeto de figurino","qtd":1,"ocorr":1,"un":"serviço","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7je40ml","cat":"pre","item":"Testes de elenco","qtd":1,"ocorr":1,"un":"serviço","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7je9seo","cat":"prod","item":"Direção","qtd":1,"ocorr":1,"un":"cachê","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7jesyid","cat":"prod","item":"Elenco (por ator)","qtd":1,"ocorr":1,"un":"cachê","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7je0tcd","cat":"prod","item":"Assistente de direção","qtd":1,"ocorr":1,"un":"cachê","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7jeo9yb","cat":"prod","item":"Construção de cenário","qtd":1,"ocorr":1,"un":"serviço","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7jewsjn","cat":"prod","item":"Confecção de figurinos","qtd":1,"ocorr":1,"un":"serviço","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7jexfx0","cat":"prod","item":"Desenho de luz","qtd":1,"ocorr":1,"un":"cachê","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7jev153","cat":"prod","item":"Trilha / sonoplastia","qtd":1,"ocorr":1,"un":"cachê","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7jexvgs","cat":"prod","item":"Operador de luz e som","qtd":1,"ocorr":1,"un":"cachê","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7jet6w3","cat":"prod","item":"Contrarregra","qtd":1,"ocorr":1,"un":"cachê","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7je7dmy","cat":"prod","item":"Locação de sala de ensaio","qtd":1,"ocorr":1,"un":"mês","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7jecn3q","cat":"prod","item":"Locação do teatro","qtd":1,"ocorr":1,"un":"semana","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7jebr4z","cat":"prod","item":"Transporte de cenário","qtd":1,"ocorr":1,"un":"serviço","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7jevcq4","cat":"prod","item":"Seguro","qtd":1,"ocorr":1,"un":"serviço","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7je7x9m","cat":"prod","item":"Oficineiro (ação formativa)","qtd":1,"ocorr":1,"un":"cachê","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7jeqz2k","cat":"prod","item":"Transporte de estudantes","qtd":1,"ocorr":1,"un":"serviço","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7jeg758","cat":"div","item":"Assessoria de imprensa","qtd":1,"ocorr":1,"un":"mês","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7jeaw2j","cat":"div","item":"Design gráfico","qtd":1,"ocorr":1,"un":"serviço","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7jeznuo","cat":"div","item":"Fotos de divulgação","qtd":1,"ocorr":1,"un":"serviço","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7je1jy9","cat":"div","item":"Teaser em vídeo","qtd":1,"ocorr":1,"un":"serviço","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7jei6g2","cat":"div","item":"Impulsionamento nas redes","qtd":1,"ocorr":1,"un":"mês","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7jefv1v","cat":"div","item":"Impressos (cartaz, programa)","qtd":1,"ocorr":1,"un":"unidade","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7jes31a","cat":"acc","item":"Intérprete de Libras","qtd":1,"ocorr":1,"un":"cachê","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7je8f9r","cat":"acc","item":"Audiodescrição","qtd":1,"ocorr":1,"un":"cachê","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7jen8r2","cat":"acc","item":"Materiais acessíveis (legendas, descrição)","qtd":1,"ocorr":1,"un":"serviço","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7jeoo2n","cat":"dir","item":"Licença de direitos (editora)","qtd":1,"ocorr":1,"un":"verba","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7jedymy","cat":"dir","item":"Direitos SBAT / ECAD (trilha)","qtd":1,"ocorr":1,"un":"verba","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7jee31z","cat":"adm","item":"Contador","qtd":1,"ocorr":1,"un":"mês","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7jew2k5","cat":"adm","item":"Taxas bancárias","qtd":1,"ocorr":1,"un":"mês","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7jewd0c","cat":"adm","item":"Registro em vídeo","qtd":1,"ocorr":1,"un":"serviço","valor":"","fonte":"Incentivo fiscal federal"},{"id":"omux3h7je7p9w","cat":"cap","item":"Captador de recursos","qtd":1,"ocorr":1,"un":"verba","valor":"","fonte":"Incentivo fiscal federal"}],"docs":[{"id":"dmux3hln9u79n","nome":"Cadastro no Salic (login gov.br)","status":"falta","vence":""},{"id":"dmux3hln9ism5","nome":"Portfólio cadastrado no Salic (obrigatório acima de R$ 200 mil no 1º projeto)","status":"falta","vence":""},{"id":"dmux3hln9a7hb","nome":"Conta no Banco do Brasil (agência para o Salic)","status":"falta","vence":""},{"id":"dmux3hln9zcrs","nome":"CNPJ ou MEI com CNAE cultural (se for PJ/MEI)","status":"falta","vence":""},{"id":"dmux3hln9rqsv","nome":"Cartão CNPJ atualizado (se for PJ/MEI)","status":"falta","vence":""},{"id":"dmux3hln9v07i","nome":"Contrato social / certificado MEI (se for PJ/MEI)","status":"falta","vence":""},{"id":"dmux3hln998c0","nome":"RG e CPF do proponente","status":"falta","vence":""},{"id":"dmux3hln9b86g","nome":"Comprovante de endereço","status":"falta","vence":""},{"id":"dmux3hln96497","nome":"Certidão negativa federal (Receita/PGFN)","status":"falta","vence":""},{"id":"dmux3hln92n95","nome":"Certidão negativa estadual","status":"falta","vence":""},{"id":"dmux3hln9s7jz","nome":"Certidão negativa municipal","status":"falta","vence":""},{"id":"dmux3hln9q612","nome":"Certidão de regularidade do FGTS","status":"falta","vence":""},{"id":"dmux3hln9ykk8","nome":"Certidão negativa de débitos trabalhistas","status":"falta","vence":""},{"id":"dmux3hln990c9","nome":"Currículos da ficha técnica","status":"falta","vence":""},{"id":"dmux3hln9ojdk","nome":"Cartas de anuência da equipe","status":"falta","vence":""},{"id":"dmux3hln9fccs","nome":"Carta de intenção / autorização de direitos autorais","status":"falta","vence":""},{"id":"dmux3hln98bb1","nome":"Texto da peça (tradução)","status":"falta","vence":""},{"id":"dmux3hln9dkbb","nome":"Carta de anuência do teatro (pauta)","status":"falta","vence":""},{"id":"dmux3hln9ojbs","nome":"Cartas de parceria com escolas (ação formativa)","status":"falta","vence":""},{"id":"dmux3hxjx4xqo","nome":"","status":"falta","vence":""},{"id":"dmux3hy2gmgbs","nome":"","status":"falta","vence":""},{"id":"dmux3hyq2hl48","nome":"","status":"falta","vence":""}],"crono":[{"id":"cmux3i1a8tczc","etapa":"Pedir licença e carta de intenção","inicio":"2026-10-06","fim":"2026-11-05","feito":false},{"id":"cmux3i1a8ds2g","etapa":"Escrever o projeto","inicio":"2026-10-06","fim":"2026-10-31","feito":false},{"id":"cmux3i1a8d0bc","etapa":"Inscrição na Rouanet (até 31/10)","inicio":"2026-10-17","fim":"2026-10-31","feito":false},{"id":"cmux3i1a8aq7d","etapa":"Captação / resultado dos editais","inicio":"2026-11-06","fim":"2027-06-06","feito":false},{"id":"cmux3i1a8f2r9","etapa":"Tradução","inicio":"2027-01-06","fim":"2027-05-06","feito":false},{"id":"cmux3i1a89gga","etapa":"Elenco e equipe","inicio":"2027-05-06","fim":"2027-06-06","feito":false},{"id":"cmux3i1a89p17","etapa":"Pré-produção (cenário, figurino)","inicio":"2027-06-06","fim":"2027-09-06","feito":false},{"id":"cmux3i1a84ucn","etapa":"Ensaios","inicio":"2027-07-28","fim":"2027-10-05","feito":false},{"id":"cmux3i1a8qaz5","etapa":"Divulgação e imprensa","inicio":"2027-08-25","fim":"2027-12-08","feito":false},{"id":"cmux3i1a8nz2k","etapa":"Temporada 1 (4 semanas)","inicio":"2027-10-06","fim":"2027-11-02","feito":false},{"id":"cmux3i1a8t869","etapa":"Temporada 2 (4 semanas)","inicio":"2027-11-10","fim":"2027-12-07","feito":false},{"id":"cmux3i1a8171e","etapa":"Pós-produção e prestação de contas (até 60 dias)","inicio":"2027-12-08","fim":"2028-02-03","feito":false}]}}}</script>
+<script data-app="">
+/* ============ CONTEÚDO FIXO ============ */
+const EDITAIS = [
+ {id:"rouanet", nome:"Lei Rouanet (federal)", tipo:"captacao", esfera:"Federal",
+  como:"Você cadastra a proposta no Salic (sistema do Ministério da Cultura). Se aprovada, ganha autorização para pedir patrocínio a empresas e pessoas, que abatem o valor do Imposto de Renda. Regra atual: IN MinC nº 29/2026.",
+  dinheiro:"Não paga direto. Aprovar ≠ ter dinheiro: você precisa captar com patrocinadores (pelo menos 10% para o projeto começar a andar).",
+  requisitos:"Pessoa física: até R$ 500 mil por projeto e 2 projetos ativos. MEI: até 4 projetos, R$ 1,5 milhão no total. PJ precisa de CNAE cultural. No primeiro projeto, até R$ 200 mil você não precisa comprovar portfólio; acima disso, precisa. Ingressos: no mínimo 10% gratuitos (social/educativo), no mínimo 20% a até R$ 50 e preço médio de até R$ 250. Obrigatório: acessibilidade e ação formativa para escola pública.",
+  periodo:"Propostas de 1º de fevereiro a 31 de outubro de cada ano.",
+  paraQuem:"Projetos que conseguem convencer empresas. Só cerca de 1 em cada 4 projetos aprovados consegue captar — comece a conversar com empresas cedo.",
+  prazo:"2026-10-31", link:"https://www.gov.br/cultura/pt-br/acesso-a-informacao/legislacao-e-normativas/instrucao-normativa-minc-no-29-de-29-de-janeiro-de-2026"},
+ {id:"proac", nome:"ProAC Editais (estado de SP)", tipo:"direto", esfera:"Estadual · SP",
+  como:"Editais da Secretaria de Cultura do Estado de SP. Você concorre com um projeto e, se for selecionado, recebe o valor direto (prêmio ou fomento).",
+  dinheiro:"Paga direto, sem captação.",
+  requisitos:"Morar ou ter sede no estado de SP (comprovação de residência). Cada edital tem suas regras de faixa de valor e documentos.",
+  periodo:"Em 2026, as linhas de teatro dependiam do ciclo 3 da PNAB. Acompanhe o site da Secretaria.",
+  paraQuem:"Quem mora em SP e quer dinheiro sem precisar captar. Muita concorrência.", prazo:"", link:"https://www.proac.sp.gov.br"},
+ {id:"proacicms", nome:"ProAC ICMS (estado de SP)", tipo:"captacao", esfera:"Estadual · SP",
+  como:"Parecido com a Rouanet, mas com o ICMS: o projeto é aprovado e depois empresas que pagam ICMS em SP patrocinam e abatem do imposto.",
+  dinheiro:"Não paga direto. Precisa captar com empresas.",
+  requisitos:"Residência ou sede em SP. Confira as janelas de inscrição no site.",
+  periodo:"Janelas ao longo do ano — confirme no site da Secretaria.",
+  paraQuem:"Quem já tem contato com empresas de médio e grande porte em SP.", prazo:"", link:"https://www.proac.sp.gov.br"},
+ {id:"fomento", nome:"Fomento ao Teatro (cidade de SP)", tipo:"direto", esfera:"Municipal · São Paulo",
+  como:"Programa da Prefeitura para núcleos artísticos com trabalho continuado (pesquisa, montagem, circulação). Os valores são altos.",
+  dinheiro:"Paga direto. Até cerca de R$ 1,6 milhão por projeto.",
+  requisitos:"Pessoa jurídica com sede na cidade de SP, representando um núcleo artístico com histórico.",
+  periodo:"A edição 2026 fechou em 25/06. A próxima deve abrir no 1º semestre de 2027.",
+  paraQuem:"Grupos com histórico comprovado. Não serve para uma montagem avulsa de estreantes.", prazo:"", link:"https://www.prefeitura.sp.gov.br/cultura"},
+ {id:"promac", nome:"Promac (cidade de SP)", tipo:"captacao", esfera:"Municipal · São Paulo",
+  como:"Incentivo fiscal da Prefeitura: empresas patrocinam e abatem do ISS ou do IPTU.",
+  dinheiro:"Não paga direto. Precisa captar.",
+  requisitos:"2 anos de residência ou sede na cidade de SP.",
+  periodo:"Em 2026, as inscrições foram de 26/03 a 26/05.",
+  paraQuem:"Quem tem contato com empresas prestadoras de serviço em SP (que pagam ISS).", prazo:"", link:"https://www.prefeitura.sp.gov.br/cultura"},
+ {id:"pnab", nome:"PNAB — Aldir Blanc (estados e cidades)", tipo:"direto", esfera:"Estadual e municipal",
+  como:"Dinheiro federal repassado aos estados e municípios, que abrem seus próprios editais (prêmios, fomento, bolsas).",
+  dinheiro:"Paga direto.",
+  requisitos:"Variam por edital. Geralmente é preciso morar no estado ou na cidade, e às vezes ter cadastro cultural.",
+  periodo:"Ciclos anuais. Acompanhe os sites e redes da Secretaria de Cultura do seu estado e da sua cidade.",
+  paraQuem:"Todo mundo. Costuma ter categorias para iniciantes e cotas.", prazo:"", link:""},
+ {id:"zerenato", nome:"Prêmio Zé Renato (cidade de SP)", tipo:"direto", esfera:"Municipal · São Paulo",
+  como:"Prêmio da Prefeitura de SP para produção e desenvolvimento de atividade teatral.",
+  dinheiro:"Paga direto.",
+  requisitos:"Grupo ou coletivo com 3 anos ou mais de trabalho comprovado.",
+  periodo:"Costuma ter inscrições entre outubro e dezembro.",
+  paraQuem:"Grupos com histórico. Quando o seu coletivo tiver 3 anos, entra no radar.", prazo:"", link:"https://www.prefeitura.sp.gov.br/cultura"},
+ {id:"sesi", nome:"SESI Viagem Teatral", tipo:"direto", esfera:"SESI-SP",
+  como:"Seleciona espetáculos já estreados para circular pelas unidades do SESI.",
+  dinheiro:"Paga cachê ao espetáculo selecionado.",
+  requisitos:"O espetáculo já precisa ter estreado (não aceita estreia).",
+  periodo:"Inscrições costumam abrir entre novembro e dezembro.",
+  paraQuem:"Depois da estreia: é ótimo para fazer a peça viajar.", prazo:"", link:"https://www.sesisp.org.br"},
+ {id:"sesc", nome:"Sesc (programação)", tipo:"direto", esfera:"Sesc",
+  como:"Não é edital fixo: você envia a proposta do espetáculo para a programação das unidades.",
+  dinheiro:"Cachê e/ou bilheteria, conforme a negociação.",
+  requisitos:"Release, vídeo, ficha técnica, rider técnico. Ajuda muito ter um vídeo de ensaio ou trecho.",
+  periodo:"Contínuo. As programações são fechadas com meses de antecedência.",
+  paraQuem:"Espetáculo pronto ou perto da estreia.", prazo:"", link:"https://www.sescsp.org.br"},
+ {id:"ccbb", nome:"CCBB (Banco do Brasil)", tipo:"direto", esfera:"Patrocínio estatal",
+  como:"Seleção pública para ocupar a programação dos Centros Culturais Banco do Brasil.",
+  dinheiro:"Patrocínio direto do banco (normalmente o projeto precisa ter Rouanet aprovada).",
+  requisitos:"Projeto com qualidade de programação nacional. As regras mudam a cada edição.",
+  periodo:"Varia por edição — acompanhe o site.",
+  paraQuem:"Projetos com equipe experiente e proposta forte.", prazo:"", link:"https://ccbb.com.br"},
+ {id:"caixa", nome:"Caixa Cultural", tipo:"direto", esfera:"Patrocínio estatal",
+  como:"Seleção pública para ocupar os espaços da Caixa Cultural em várias cidades.",
+  dinheiro:"Patrocínio direto.",
+  requisitos:"Variam por edição. Normalmente pedem Rouanet aprovada e documentos da PJ.",
+  periodo:"Varia por edição.",
+  paraQuem:"Projetos prontos para ocupar um espaço por uma temporada.", prazo:"", link:"https://www.caixacultural.gov.br"},
+ {id:"funarte", nome:"Funarte", tipo:"direto", esfera:"Federal",
+  como:"Editais nacionais de prêmios, bolsas e circulação.",
+  dinheiro:"Paga direto.",
+  requisitos:"Variam por edital.",
+  periodo:"Irregular — acompanhe o site.",
+  paraQuem:"Todo mundo; especialmente quem tem proposta de pesquisa ou circulação.", prazo:"", link:"https://www.gov.br/funarte"},
+ {id:"crowd", nome:"Financiamento coletivo (Catarse, Benfeitoria)", tipo:"direto", esfera:"Público",
+  como:"Campanha online em que o público apoia em troca de recompensas (ingresso, nome no programa, ensaio aberto).",
+  dinheiro:"Direto do público. Há modelo tudo-ou-nada e modelo flexível; a plataforma cobra taxa.",
+  requisitos:"Vídeo, metas claras, recompensas e muita divulgação.",
+  periodo:"Quando você quiser — ideal 2 a 3 meses antes da estreia.",
+  paraQuem:"Para complementar o orçamento e formar público ao mesmo tempo.", prazo:"", link:"https://www.catarse.me"},
+ {id:"direto", nome:"Patrocínio e apoio direto (sem lei)", tipo:"direto", esfera:"Privado",
+  como:"Empresas e comércios locais apoiam com dinheiro ou permuta (gráfica, figurino, alimentação, espaço) em troca de marca no material.",
+  dinheiro:"Direto ou permuta.",
+  requisitos:"Uma apresentação curta do projeto e uma tabela de cotas de apoio.",
+  periodo:"Contínuo.",
+  paraQuem:"Todo mundo. Permutas reduzem muito o orçamento.", prazo:"", link:""}
+];
+
+/* Etapas na ordem do Salic. "salic" = onde o texto vai no sistema. */
+const WIZ = [
+ {k:"nome", t:"Nome e resumo da proposta", salic:"Informações iniciais → Nome da proposta + Resumo", min:250, max:700,
+  what:"O nome da proposta e um resumo de no máximo 5 linhas: o que é, quem faz, onde, quando e para quem. É a primeira coisa que o avaliador lê.",
+  ask:["Qual peça? De quem?","Quantas sessões, onde e quando?","Tem sessão gratuita, acessibilidade, ingresso popular?"],
+  ex:"\"Rumores\" — montagem da farsa de Neil Simon em nova tradução, com 16 sessões pagas e 2 gratuitas em duas temporadas de 4 semanas em São Paulo, no 2º semestre de 2027, em teatro de 200 lugares, com ingresso popular, Libras e audiodescrição.",
+  tips:["No Salic o resumo tem no máximo 5 linhas — seja direta.","Use números: sessões, lugares, meses.","Evite adjetivos vagos (\"incrível\", \"único\") sem prova."]},
+ {k:"objGeral", t:"Objetivo geral", salic:"Detalhes técnicos → Objetivos gerais", min:100, max:600,
+  what:"A finalidade principal do projeto, em uma ou duas frases, começando com verbo no infinitivo.",
+  ask:["Se o projeto der certo, o que terá acontecido?"],
+  ex:"Montar e apresentar a comédia \"Rumores\", de Neil Simon, em São Paulo, ampliando o acesso do público à farsa com ingresso acessível e medidas de acessibilidade.",
+  tips:["Um único objetivo grande. Os detalhes vão nos específicos.","Comece com verbo: montar, realizar, difundir."]},
+ {k:"objEsp", t:"Objetivos específicos", salic:"Detalhes técnicos → Objetivos específicos", min:250, max:1500,
+  what:"Os passos concretos, com quantidades. O Salic pede que apareçam todos os produtos e suas quantidades.",
+  ask:["Quantas sessões pagas e gratuitas?","Quantas sessões com Libras e audiodescrição?","Qual ação formativa e para quantas pessoas?","Que registros serão feitos (vídeo, fotos)?"],
+  ex:"1. Realizar 18 apresentações (16 pagas e 2 gratuitas) em São Paulo. 2. Oferecer 2 sessões com Libras e audiodescrição. 3. Destinar no mínimo 10% dos ingressos à distribuição gratuita para escolas públicas e projetos sociais. 4. Realizar ensaios abertos e oficina para pelo menos 360 estudantes e professores da rede pública (10% dos 3.600 ingressos). 5. Registrar o espetáculo em vídeo.",
+  tips:["Cada objetivo precisa ser comprovável (borderô, lista de presença, fotos).","As quantidades precisam bater com o plano de distribuição e o orçamento."]},
+ {k:"justificativa", t:"Justificativa", salic:"Detalhes técnicos → Justificativa", min:600, max:3000,
+  what:"Por que esse projeto merece incentivo: relevância da obra, importância para o público e a cidade, capacidade da equipe. No Salic, você também precisa dizer em quais incisos dos artigos 1º e 3º da Lei 8.313/91 (Lei Rouanet) o projeto se enquadra.",
+  ask:["Por que essa peça, agora?","O que ela traz que falta na cena da sua cidade?","Quem ganha com isso, além de vocês?","Em quais finalidades da lei o projeto se encaixa?"],
+  ex:"A farsa é um gênero pouco montado profissionalmente em São Paulo, embora lote teatros pelo mundo. \"Rumores\" estreou na Broadway em 1988 e segue sendo montada em vários países. O projeto aproxima esse repertório do público com ingresso acessível e forma atores em uma técnica de alta precisão cômica.\n\nEnquadramento: Art. 1º, incisos I, III e VIII; Art. 3º, inciso II, alínea \"c\" (espetáculos de artes cênicas) da Lei 8.313/91.",
+  tips:["Para um espetáculo de teatro, costumam servir: Art. 1º, I (livre acesso às fontes da cultura), III (apoiar e difundir as manifestações culturais) e VIII (produção e difusão de bens culturais de valor universal); Art. 3º, II, \"c\" (espetáculos de artes cênicas). Confira o texto da lei antes de enviar.","Dados > opinião: cite montagens, público e prêmios.","Mostre que a equipe consegue executar."]},
+ {k:"sinopse", t:"Sinopse da obra", salic:"Detalhes técnicos → Sinopse da obra", min:300, max:1500,
+  what:"Do que trata a peça, em alguns parágrafos.",
+  ask:["Qual é a história em 3 frases?","Quem são os personagens principais?","Qual é o tom (comédia, drama)?"],
+  ex:"Numa festa de aniversário de casamento, quatro casais chegam a uma casa onde o anfitrião foi ferido e a anfitriã sumiu. Para proteger as aparências, todos mentem — e cada mentira gera outra, numa noite de confusões em ritmo crescente.",
+  tips:["Não conte o final.","Curto e com gancho."]},
+ {k:"especificacoes", t:"Especificações técnicas do produto", salic:"Detalhes técnicos → Especificações técnicas do produto", min:300, max:1500,
+  what:"Os detalhes concretos do espetáculo: duração, classificação indicativa, número de atores, cenário, figurino, luz, som e proposta de direção.",
+  ask:["Quanto tempo dura?","Classificação indicativa?","Quantas pessoas em cena?","Como serão cenário, figurino, luz e som?"],
+  ex:"Espetáculo de cerca de 2 horas com intervalo, classificação 14 anos, 10 atores em cena. Cenário único (sala de estar com várias portas), figurinos de gala dos anos 80, desenho de luz próprio e trilha original. Direção focada no ritmo e na precisão física da farsa.",
+  tips:["Ajuda anexar referências visuais.","Estas informações sustentam os custos do orçamento — mantenha coerência."]},
+ {k:"etapasPre", t:"Etapas — pré-produção", salic:"Detalhes técnicos → Etapas de trabalho → Pré-produção", min:200, max:1500,
+  what:"Tudo o que acontece antes dos ensaios, com prazo estimado.",
+  ask:["Direitos e tradução?","Elenco e equipe?","Projetos de cenário e figurino?","Contratação do teatro?"],
+  ex:"(3 meses) Licenciamento de direitos e tradução; seleção de elenco; contratação da equipe; projetos de cenário, figurino e luz; reserva de pauta no teatro; planejamento de divulgação e acessibilidade.",
+  tips:["Indique o prazo (dias, semanas ou meses).","Bata com a aba Cronograma."]},
+ {k:"etapasProd", t:"Etapas — produção / execução", salic:"Detalhes técnicos → Etapas de trabalho → Produção/Execução", min:200, max:1500,
+  what:"Ensaios, construção, estreia e temporadas.",
+  ask:["Quantas semanas de ensaio?","Quando entram cenário e figurino?","Quando são as temporadas e as sessões com acessibilidade?"],
+  ex:"(4 meses) 10 semanas de ensaios; construção de cenário e confecção de figurinos; sessão de fotos; temporada 1 (4 semanas) e temporada 2 (4 semanas), incluindo 2 sessões gratuitas e 2 com Libras e audiodescrição; ações formativas com escolas públicas.",
+  tips:["Ensaios de farsa precisam de tempo: não corte essa etapa."]},
+ {k:"etapasPos", t:"Etapas — pós-produção", salic:"Detalhes técnicos → Etapas de trabalho → Pós-produção", min:100, max:800,
+  what:"O que acontece depois da última sessão: desmontagem, relatório, clipping e prestação de contas. No Salic, no máximo 60 dias.",
+  ask:["O que precisa ser entregue no fim?"],
+  ex:"(até 60 dias) Desmontagem e devolução de equipamentos; organização de borderôs, listas de presença, fotos e clipping; relatório final e prestação de contas.",
+  tips:["Máximo de 60 dias na pós-produção."]},
+ {k:"equipe", t:"Ficha técnica", salic:"Detalhes técnicos → Ficha técnica", min:300, max:3000,
+  what:"Sua função no projeto e cada profissional principal: nome completo, função e currículo resumido.",
+  ask:["Qual é a sua atividade no projeto?","Quem dirige, produz, atua?","Cenário, figurino, luz, trilha?"],
+  ex:"Proponente e produtora: [nome] — psicóloga e produtora artística, fundadora da Instável Studio… Direção: [nome] — …",
+  tips:["Currículos curtos (3–5 linhas), com o mais relevante primeiro.","A capacidade da equipe é avaliada na análise técnica.","Peça carta de anuência assinada de cada pessoa (vai em Documentos)."]},
+ {k:"acessibilidade", t:"Acessibilidade", salic:"Informações iniciais → Responsabilidade social → Acessibilidade", min:300, max:1500,
+  what:"Medidas em três frentes, todas obrigatórias: (1) arquitetônica — acesso ao local, sanitários e circulação; (2) comunicacional — para pessoas com deficiência e pessoas autistas (Libras, audiodescrição, sessão relaxada etc.); (3) divulgação acessível — materiais em formato acessível informando as medidas. É obrigatório seguir o Guia de Acessibilidade do Ministério dos Direitos Humanos e da Cidadania.",
+  ask:["O teatro tem rampa, elevador e banheiro acessível?","Quantas sessões com Libras e audiodescrição?","Terá sessão adaptada para pessoas autistas?","Como o material de divulgação será acessível?"],
+  ex:"Arquitetônica: teatro com rampa, elevador, assentos reservados e sanitários acessíveis. Comunicacional: 2 sessões com intérprete de Libras e audiodescrição; 1 sessão relaxada para pessoas autistas. Divulgação: posts com descrição de imagem, vídeos legendados e com Libras, programa digital acessível.",
+  tips:["Escreva as três frentes separadas.","No orçamento, acessibilidade + comunicação e divulgação somam no máximo 20%."]},
+ {k:"democratizacao", t:"Democratização de acesso", salic:"Informações iniciais → Responsabilidade social → Democratização de acesso", min:200, max:1200,
+  what:"No Salic você marca as medidas e descreve: distribuição gratuita, transporte gratuito, registro online com Libras e audiodescrição, atividades paralelas gratuitas, ações para crianças e adolescentes, parcerias e bolsas de formação, entre outras.",
+  ask:["Para quem vão os ingressos gratuitos?","Vai oferecer transporte para escolas?","O registro em vídeo ficará disponível online?"],
+  ex:"Distribuição gratuita de no mínimo 10% dos ingressos para escolas públicas e projetos sociais, incluindo 2 sessões gratuitas; ingresso popular de até R$ 50 em pelo menos 20% da lotação; registro do espetáculo disponibilizado online com Libras e audiodescrição.",
+  tips:["Use os números do Plano de distribuição (próxima etapa).","Diga como os ingressos gratuitos chegarão ao público."]},
+ {k:"distribuicao", t:"Plano de distribuição", salic:"Locais e distribuição → Plano de distribuição", min:100, max:1500, calc:true,
+  what:"Quantos ingressos existem e para onde vão. Regras: no mínimo 10% gratuitos (social/educativo); até 10% para o patrocinador; até 10% para divulgação; no mínimo 20% vendidos a até R$ 50; o resto com preço livre, desde que o preço médio fique em até R$ 250. Meia-entrada segue a lei.",
+  ask:["Use a calculadora abaixo: ela confere as regras e escreve o resumo para você."],
+  ex:"Produto principal: espetáculo teatral. 3.600 ingressos (200 lugares × 18 sessões): 400 gratuitos social/educativo (11%); 180 para patrocinador (5%); 180 para divulgação (5%); 1.080 a R$ 40 (30%); 1.760 a preço médio de R$ 80 (49%).",
+  tips:["No Salic você preenche os percentuais por categoria — copie da calculadora.","Os valores ficam salvos e a receita aparece na aba Orçamento."]},
+ {k:"contrapartida", t:"Ação formativa (contrapartida social)", salic:"Detalhes técnicos → Descrição da atividade do produto", min:200, max:1200,
+  what:"Obrigatória quando há venda de ingressos: ações formativas além das sessões, para estudantes e professores de escolas públicas. Precisam atender pelo menos 10% do público previsto, com mínimo de 20 e máximo de 500 beneficiários. Podem ser oficinas, cursos, palestras, ensaios abertos ou bolsas.",
+  ask:["Quantas pessoas isso precisa atender? (10% do público — veja a conta abaixo)","Que formato vocês conseguem fazer bem?","Com quais escolas?"],
+  ex:"4 ensaios abertos seguidos de bate-papo para estudantes e professores de escolas públicas (cerca de 330 pessoas) e 1 oficina de introdução à farsa (8 horas, 30 participantes), totalizando 360 beneficiários — 10% dos 3.600 ingressos do plano de distribuição.",
+  tips:["Tudo o que prometer, precisa comprovar (lista de presença, fotos).","Coloque os custos (transporte, oficineiro) no orçamento."]},
+ {k:"local", t:"Local de realização e deslocamentos", salic:"Locais e distribuição → Local de realização / Deslocamentos", min:50, max:800,
+  what:"Estado e cidade onde o projeto acontece, o teatro (se já souber) e qualquer deslocamento (viagens, transporte de cenário, transporte de público).",
+  ask:["Qual cidade e qual teatro?","Haverá viagem ou transporte de escolas?"],
+  ex:"São Paulo/SP — teatro de 200 lugares (a definir). Deslocamentos: transporte de estudantes de escolas públicas para as sessões gratuitas e ensaios abertos.",
+  tips:["Se ainda não tem o teatro, indique o porte e a região."]},
+ {k:"periodo", t:"Período de realização", salic:"Informações iniciais → Período de realização (data de início e data final)", min:30, max:500,
+  what:"Data de início (começo da pré-produção) e data final (fim da pós-produção, incluindo a prestação de contas).",
+  ask:["Quando começa a pré-produção?","Quando termina a pós-produção?"],
+  ex:"Início: março de 2027. Fim: dezembro de 2027 (pós-produção de até 60 dias depois da última sessão).",
+  tips:["Use as datas da aba Cronograma.","O prazo de captação vai até 36 meses."]},
+ {k:"publico", t:"Público-alvo e divulgação", salic:"Detalhes técnicos → Outras informações (e outros editais)", min:300, max:1500,
+  what:"Quem vocês querem alcançar e como o público vai ficar sabendo. Não tem campo próprio no Salic — vai em \"Outras informações\" —, mas quase todo outro edital pede.",
+  ask:["Faixa etária e perfil?","Quantas pessoas, com estimativa realista?","Redes, imprensa, cartazes, parcerias?"],
+  ex:"Jovens e adultos a partir de 14 anos, com foco em quem vai pouco ao teatro. Estimativa: cerca de 2.500 espectadores. Divulgação: assessoria de imprensa 6 semanas antes da estreia, campanha nas redes com teaser e bastidores, parcerias com escolas de teatro.",
+  tips:["Toda divulgação usa as marcas obrigatórias da lei — leia o manual de marcas.","Use o botão abaixo para inserir a conta de público."]},
+ {k:"resultados", t:"Resultados esperados e outras informações", salic:"Detalhes técnicos → Outras informações", min:150, max:1200,
+  what:"O que vai existir quando o projeto acabar, como vocês vão provar, e qualquer informação importante que não coube nos outros campos.",
+  ask:["Quantas pessoas? Como contar?","Que registros (fotos, vídeo, clipping)?","Situação dos direitos autorais (carta de intenção)?"],
+  ex:"18 sessões, cerca de 2.500 espectadores (borderô), 360 beneficiários de ações formativas, registro em vídeo, clipping e relatório final. Direitos: pedido de licença enviado à Concord Theatricals; carta de intenção em anexo.",
+  tips:["Os números precisam bater com Objetivos e Plano de distribuição.","Use este campo para explicar a situação dos direitos autorais."]}
+];
+
+const ORC_CATS = [
+ {k:"pre", n:"Pré-produção"},{k:"prod", n:"Produção"},
+ {k:"div", n:"Comunicação e divulgação"},{k:"acc", n:"Acessibilidade"},
+ {k:"dir", n:"Direitos autorais e tradução"},{k:"adm", n:"Custos administrativos"},
+ {k:"cap", n:"Remuneração de captação"}
+];
+const FONTES = ["Incentivo fiscal federal","Recursos próprios","Recursos privados de terceiros","Incentivo estadual/municipal"];
+const ORC_SUG = [
+ ["pre","Coordenação de produção","mês"],["pre","Tradução do texto","serviço"],["pre","Projeto de cenário","serviço"],["pre","Projeto de figurino","serviço"],["pre","Testes de elenco","serviço"],
+ ["prod","Direção","cachê"],["prod","Elenco (por ator)","cachê"],["prod","Assistente de direção","cachê"],["prod","Construção de cenário","serviço"],["prod","Confecção de figurinos","serviço"],["prod","Desenho de luz","cachê"],["prod","Trilha / sonoplastia","cachê"],["prod","Operador de luz e som","cachê"],["prod","Contrarregra","cachê"],["prod","Locação de sala de ensaio","mês"],["prod","Locação do teatro","semana"],["prod","Transporte de cenário","serviço"],["prod","Seguro","serviço"],["prod","Oficineiro (ação formativa)","cachê"],["prod","Transporte de estudantes","serviço"],
+ ["div","Assessoria de imprensa","mês"],["div","Design gráfico","serviço"],["div","Fotos de divulgação","serviço"],["div","Teaser em vídeo","serviço"],["div","Impulsionamento nas redes","mês"],["div","Impressos (cartaz, programa)","unidade"],
+ ["acc","Intérprete de Libras","cachê"],["acc","Audiodescrição","cachê"],["acc","Materiais acessíveis (legendas, descrição)","serviço"],
+ ["dir","Licença de direitos (editora)","verba"],["dir","Direitos SBAT / ECAD (trilha)","verba"],
+ ["adm","Contador","mês"],["adm","Taxas bancárias","mês"],["adm","Registro em vídeo","serviço"],
+ ["cap","Captador de recursos","verba"]
+];
+const DOC_SUG = [
+ ["Cadastro no Salic (login gov.br)"],["Portfólio cadastrado no Salic (obrigatório acima de R$ 200 mil no 1º projeto)"],["Conta no Banco do Brasil (agência para o Salic)"],
+ ["CNPJ ou MEI com CNAE cultural (se for PJ/MEI)"],["Cartão CNPJ atualizado (se for PJ/MEI)"],["Contrato social / certificado MEI (se for PJ/MEI)"],
+ ["RG e CPF do proponente"],["Comprovante de endereço"],
+ ["Certidão negativa federal (Receita/PGFN)"],["Certidão negativa estadual"],["Certidão negativa municipal"],["Certidão de regularidade do FGTS"],["Certidão negativa de débitos trabalhistas"],
+ ["Currículos da ficha técnica"],["Cartas de anuência da equipe"],
+ ["Carta de intenção / autorização de direitos autorais"],["Texto da peça (tradução)"],["Carta de anuência do teatro (pauta)"],["Cartas de parceria com escolas (ação formativa)"]
+];
+</script>
+<script data-app="">
+/* ============ ESTADO E ARMAZENAMENTO ============ */
+const LS_KEY="instavel-editais-v1", LS_UI="instavel-editais-ui";
+const S={projects:{}, cur:null, tab:"painel", step:0, edFilter:"todos"};
+let db=null, coll=null, cloud=false;
+const dirty=new Set(), inflight={}, ver={};
+let saveTimer=null, pendingRender=false;
+
+let savedAt=0;
+function saveLocal(){savedAt=Date.now();lsSet(LS_KEY,{v:2,savedAt,projects:S.projects})}
+function lsGet(k){try{return JSON.parse(localStorage.getItem(k)||"null")}catch(e){return null}}
+function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+function uid(p){return (p||"i")+Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
+function esc(s){return String(s??"").replace(/[&<>\"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]))}
+function money(n){return (Number(n)||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"})}
+function today(){const d=new Date();d.setHours(0,0,0,0);return d}
+function pd(s){if(!s)return null;const [y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d)}
+function iso(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function addDays(d,n){const x=new Date(d);x.setDate(x.getDate()+n);return x}
+function addMonths(d,n){const x=new Date(d);x.setMonth(x.getMonth()+n);return x}
+function daysTo(s){const d=pd(s);return d?Math.round((d-today())/864e5):null}
+function fmtD(s){const d=pd(s);return d?d.toLocaleDateString("pt-BR"):"—"}
+function cur(){return S.projects[S.cur]||null}
+
+function blankProject(nome){
+  return {id:uid("p"),nome:nome||"Novo projeto",obra:"",autor:"",tipoDireito:"licenciada",editora:"",contato:"",
+    fase:"Ideia",cor:"",cidade:"São Paulo",lugares:200,sessoesPagas:16,sessoesGratis:2,temporada:"",estreia:"",proponente:"PF",primeiraVez:true,
+    preco:40,ocupacao:70,meia:40,valorProponente:"",criado:iso(new Date()),
+    dist:{social:12,patroc:5,divulg:5,popular:30,precoPop:40,precoLivre:80},
+    direitos:{pedido:"",cotacao:"",carta:"",contrato:"",valor:"",moeda:"US$",notas:""},
+    inscricoes:[],texto:{},orcamento:[],docs:[],crono:[]};
+}
+function normalize(p){
+  const b=blankProject(p.nome); const o=Object.assign(b,p);
+  o.direitos=Object.assign(blankProject().direitos,p.direitos||{});
+  ["inscricoes","orcamento","docs","crono"].forEach(k=>{if(!Array.isArray(o[k]))o[k]=[]});
+  if(!o.texto||typeof o.texto!=="object")o.texto={};
+  o.dist=Object.assign(blankProject().dist,p.dist||{});
+  const T=o.texto, mv=(a,b)=>{if(T[a]&&!T[b])T[b]=T[a];if(T[a]&&T[b]!==T[a])T[b]+= "\n\n"+T[a];delete T[a]};
+  if(T.objetivos)mv("objetivos","objGeral"); if(T.objeto)mv("objeto","sinopse"); if(T.etapas)mv("etapas","etapasPre");
+  if(T.divulgacao)mv("divulgacao","publico"); if(T.orcresumo)mv("orcresumo","resultados");
+  o.orcamento.forEach(r=>{if(r.ocorr===undefined)r.ocorr=1;if(!r.fonte)r.fonte=FONTES[0]});
+  return o;
+}
+
+function touch(id){
+  id=id||S.cur; if(!id)return;
+  dirty.add(id); ver[id]=(ver[id]||0)+1;
+  saveLocal();
+  setBadge(cloud?"salvando…":"salvo neste navegador",!cloud);
+  clearTimeout(saveTimer); saveTimer=setTimeout(flush,800);
+}
+async function flush(){
+  if(!cloud){dirty.clear();return}
+  for(const id of [...dirty]){
+    if(inflight[id])continue;
+    const v=ver[id]; inflight[id]=true;
+    try{
+      const p=S.projects[id];
+      if(p) await coll.doc(id).set(JSON.parse(JSON.stringify(p)));
+      if(ver[id]===v)dirty.delete(id);
+    }catch(e){console.warn("save",e);setBadge("erro ao salvar — tentando de novo",false)}
+    inflight[id]=false;
+  }
+  if(dirty.size){clearTimeout(saveTimer);saveTimer=setTimeout(flush,1500)} else setBadge("salvo na nuvem",true);
+}
+function setBadge(t,ok){const b=document.getElementById("saveBadge");b.textContent=t;b.classList.toggle("ok",!!ok)}
+
+async function initCloud(){
+  try{
+    if(!window.claude||!window.claude.use){setBadge("salvo neste navegador",true);return}
+    db=await window.claude.use("db");
+    if(!db){setBadge("salvo neste navegador",true);return}
+    coll=db.collection("projetos"); cloud=true; setBadge("conectando…",false);
+    let first=true;
+    coll.onSnapshot(snap=>{
+      const seen=new Set();
+      snap.docs.forEach(d=>{
+        seen.add(d.id);
+        if(dirty.has(d.id)||inflight[d.id])return;
+        const data=d.data(); if(data)S.projects[d.id]=normalize(JSON.parse(JSON.stringify(data)));
+      });
+      if(!snap.metadata.fromCache){
+        Object.keys(S.projects).forEach(id=>{
+          if(!seen.has(id)&&!dirty.has(id)&&!inflight[id]){
+            if(first&&snap.empty){dirty.add(id);ver[id]=(ver[id]||0)+1} else delete S.projects[id];
+          }
+        });
+        if(first&&dirty.size){clearTimeout(saveTimer);saveTimer=setTimeout(flush,300)}
+        first=false;
+      }
+      saveLocal();
+      if(!dirty.size)setBadge("salvo na nuvem",true);
+      if(!S.projects[S.cur])S.cur=Object.keys(S.projects)[0]||null;
+      softRender();
+    },err=>{console.warn(err);cloud=false;setBadge("salvo neste navegador",true)});
+  }catch(e){console.warn(e);cloud=false;setBadge("salvo neste navegador",true)}
+}
+function softRender(){
+  const a=document.activeElement;
+  if(a&&a.closest&&a.closest("#view")&&/INPUT|TEXTAREA|SELECT/.test(a.tagName)){pendingRender=true;return}
+  render();
+}
+document.addEventListener("focusout",()=>{if(pendingRender){setTimeout(()=>{const a=document.activeElement;if(!(a&&/INPUT|TEXTAREA|SELECT/.test(a.tagName))){pendingRender=false;render()}},50)}});
+
+/* ============ UI GERAL ============ */
+const TABS=[["painel","Painel geral"],["direitos","Direitos autorais"],["editais","Editais e incentivos"],["inscricoes","Inscrições"],["escrever","Escrevendo o projeto"],["orcamento","Orçamento"],["documentos","Documentos"],["cronograma","Cronograma"]];
+function saveUI(){lsSet(LS_UI,{cur:S.cur,tab:S.tab,step:S.step,edFilter:S.edFilter})}
+function toast(t){const el=document.getElementById("toast");el.textContent=t;el.classList.add("show");clearTimeout(toast._t);toast._t=setTimeout(()=>el.classList.remove("show"),2200)}
+async function copy(text){
+  try{await navigator.clipboard.writeText(text);toast("Copiado!")}
+  catch(e){const t=document.createElement("textarea");t.value=text;t.style.position="fixed";t.style.opacity="0";document.body.appendChild(t);t.select();try{document.execCommand("copy");toast("Copiado!")}catch(_){toast("Não consegui copiar — selecione e copie manualmente")}t.remove()}
+}
+function openModal(html){document.getElementById("modalBody").innerHTML=html;document.getElementById("modal").classList.add("open");const f=document.querySelector("#modalBody input,#modalBody button");f&&f.focus()}
+function closeModal(){document.getElementById("modal").classList.remove("open")}
+document.getElementById("modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+function askConfirm(msg,yes){
+  openModal(`<h3>Tem certeza?</h3><p>${esc(msg)}</p><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px"><button class="btn soft" data-a="mclose">Cancelar</button><button class="btn" id="cfYes">Sim, apagar</button></div>`);
+  document.getElementById("cfYes").onclick=()=>{closeModal();yes()};
+}
+
+function renderHeader(){
+  const sel=document.getElementById("projSel"); const ids=Object.keys(S.projects).sort((a,b)=>(S.projects[a].criado||"").localeCompare(S.projects[b].criado||""));
+  sel.innerHTML=ids.length?ids.map(id=>`<option value="${id}" ${id===S.cur?"selected":""}>${esc(S.projects[id].nome)}</option>`).join(""):`<option>Nenhum projeto ainda</option>`;
+  sel.disabled=!ids.length; document.getElementById("btnEdit").style.display=ids.length?"":"none";
+  document.getElementById("tabs").innerHTML=TABS.map(([k,n],i)=>`<button class="tab" role="tab" data-tab="${k}" aria-selected="${S.tab===k}"><span class="n">${i+1}</span>${n}</button>`).join("");
+}
+function render(){
+  renderHeader();
+  const v=document.getElementById("view");
+  const needsProject=S.tab!="painel"&&S.tab!="editais";
+  if(needsProject&&!cur()){v.innerHTML=emptyProjects();return}
+  v.innerHTML=(needsProject?projStrip():"")+({painel:vPainel,direitos:vDireitos,editais:vEditais,inscricoes:vInscricoes,escrever:vEscrever,orcamento:vOrcamento,documentos:vDocumentos,cronograma:vCronograma})[S.tab]();
+  if(S.tab==="orcamento")updateBudget();
+}
+function emptyProjects(){return `<div class="empty"><h3>Você ainda não tem nenhum projeto</h3><p>Crie o primeiro para começar. Cada projeto guarda suas inscrições, texto, orçamento, documentos e cronograma.</p><button class="btn" data-a="new">+ Criar meu primeiro projeto</button></div>`}
+
+/* ============ FICHA DO PROJETO (modal) ============ */
+function projectForm(p,isNew){
+  const o=p||blankProject("");
+  openModal(`<h3>${isNew?"Novo projeto":"Ficha do projeto"}</h3>
+  <p class="muted">Só o básico. Dá para mudar depois.</p>
+  <form id="pform">
+  <div class="frow"><label class="f"><span>Nome do projeto *</span><input type="text" name="nome" required value="${esc(o.nome)}" placeholder="Ex.: Rumores"></label>
+  <label class="f"><span>Fase</span><select name="fase">${FASES.map(f=>`<option ${o.fase===f?"selected":""}>${f}</option>`).join("")}</select></label></div>
+  <div style="margin-bottom:10px;font-size:.82rem;font-weight:600;color:var(--ink-soft)"><span style="display:block;margin-bottom:4px">Cor do projeto</span><span style="display:flex;gap:8px">${PCORES.map(c=>`<label style="cursor:pointer"><input type="radio" name="cor" value="${c}" ${pcolor(o)===c?"checked":""} style="position:absolute;opacity:0"><span class="swatch" style="background:${c}"></span></label>`).join("")}</span></div>
+  <div class="frow"><label class="f"><span>Obra (título original)</span><input type="text" name="obra" value="${esc(o.obra)}" placeholder="Ex.: Rumors"></label>
+  <label class="f"><span>Autor(a)</span><input type="text" name="autor" value="${esc(o.autor)}" placeholder="Ex.: Neil Simon"></label></div>
+  <label class="f"><span>Direitos do texto</span><select name="tipoDireito">
+   <option value="licenciada" ${o.tipoDireito==="licenciada"?"selected":""}>Preciso de licença (autor vivo ou falecido há menos de 70 anos)</option>
+   <option value="propria" ${o.tipoDireito==="propria"?"selected":""}>Texto próprio / da equipe</option>
+   <option value="dominio" ${o.tipoDireito==="dominio"?"selected":""}>Domínio público</option></select></label>
+  <div class="frow"><label class="f"><span>Cidade</span><input type="text" name="cidade" value="${esc(o.cidade)}"></label>
+  <label class="f"><span>Lugares no teatro</span><input type="number" min="0" name="lugares" value="${esc(o.lugares)}"></label></div>
+  <div class="frow"><label class="f"><span>Sessões pagas</span><input type="number" min="0" name="sessoesPagas" value="${esc(o.sessoesPagas)}"></label>
+  <label class="f"><span>Sessões gratuitas</span><input type="number" min="0" name="sessoesGratis" value="${esc(o.sessoesGratis)}"></label></div>
+  <div class="frow"><label class="f"><span>Temporada (texto livre)</span><input type="text" name="temporada" value="${esc(o.temporada)}" placeholder="Ex.: 2º semestre de 2027"></label>
+  <label class="f"><span>Data prevista de estreia</span><input type="date" name="estreia" value="${esc(o.estreia)}"></label></div>
+  <div class="frow"><label class="f"><span>Proponente</span><select name="proponente">${["PF","MEI","PJ"].map(x=>`<option ${o.proponente===x?"selected":""}>${x}</option>`).join("")}</select></label>
+  <label class="f" style="display:flex;gap:8px;align-items:center;margin-top:22px"><input type="checkbox" name="primeiraVez" ${o.primeiraVez?"checked":""}> Primeira vez na Rouanet</label></div>
+  <div style="display:flex;gap:8px;justify-content:space-between;flex-wrap:wrap;margin-top:10px">
+   ${isNew?"<span></span>":`<span style="display:flex;gap:8px"><button type="button" class="btn danger sm" data-a="delproj">Apagar</button><button type="button" class="btn soft sm" data-a="dupproj">Duplicar</button></span>`}
+   <span style="display:flex;gap:8px"><button type="button" class="btn soft" data-a="mclose">Cancelar</button><button class="btn" type="submit">${isNew?"Criar projeto":"Salvar"}</button></span>
+  </div></form>`);
+  document.getElementById("pform").onsubmit=e=>{
+    e.preventDefault(); const f=new FormData(e.target);
+    const tgt=isNew?blankProject():S.projects[S.cur];
+    ["nome","fase","cor","obra","autor","tipoDireito","cidade","temporada","estreia","proponente"].forEach(k=>tgt[k]=String(f.get(k)||"").trim());
+    ["lugares","sessoesPagas","sessoesGratis"].forEach(k=>tgt[k]=Number(f.get(k))||0);
+    tgt.primeiraVez=!!f.get("primeiraVez"); if(!tgt.nome)tgt.nome="Sem nome";
+    if(isNew){S.projects[tgt.id]=tgt;S.cur=tgt.id; if(S.tab==="painel")S.tab="escrever"}
+    touch(tgt.id); saveUI(); closeModal(); render(); toast(isNew?"Projeto criado":"Ficha salva");
+  };
+}
+
+/* ============ 1. PAINEL ============ */
+function wizPct(p){const n=WIZ.filter(s=>stepDone(p,s)).length;return Math.round(n/WIZ.length*100)}
+function orcTotal(p){return p.orcamento.reduce((a,r)=>a+rowVal(r),0)}
+function allDeadlines(){
+  const L=[];
+  Object.values(S.projects).forEach(p=>{
+    p.inscricoes.forEach(i=>{if(i.prazo&&(i.status==="preparando"||!i.status))L.push({d:i.prazo,t:"Inscrição: "+(i.edital||"edital sem nome"),p,tab:"inscricoes"})});
+    p.docs.forEach(d=>{if(d.vence&&d.status!="na")L.push({d:d.vence,t:"Vence: "+d.nome,p,tab:"documentos"})});
+    p.crono.forEach(c=>{if(c.fim&&!c.feito)L.push({d:c.fim,t:"Etapa: "+c.etapa,p,tab:"cronograma"})});
+  });
+  return L.filter(x=>daysTo(x.d)>=-30).sort((a,b)=>a.d.localeCompare(b.d));
+}
+function pendencias(p){
+  const L=[];
+  if(p.tipoDireito==="licenciada"&&!p.direitos.pedido)L.push(["Pedir a licença de direitos autorais","direitos"]);
+  else if(p.tipoDireito==="licenciada"&&!p.direitos.carta)L.push(["Conseguir a carta de intenção da editora","direitos"]);
+  const vazios=WIZ.filter(s=>!(p.texto[s.k]||"").trim()).length; if(vazios)L.push([`Escrever ${vazios} parte(s) do projeto`,`escrever`]);
+  if(!p.orcamento.length||!orcTotal(p))L.push(["Montar o orçamento","orcamento"]);
+  if(distCalc(p).erros.length)L.push(["Ajustar o plano de distribuição de ingressos","orcamento"]);
+  const falta=p.docs.filter(d=>d.status==="falta").length; if(!p.docs.length)L.push(["Montar a lista de documentos","documentos"]); else if(falta)L.push([`Providenciar ${falta} documento(s)`,`documentos`]);
+  if(!p.crono.length)L.push(["Montar o cronograma","cronograma"]);
+  if(!p.inscricoes.length)L.push(["Escolher em quais editais se inscrever","editais"]);
+  return L;
+}
+function dbox(s){const n=daysTo(s);const cls=n<0?"late":n<=14?"urg":"";const lbl=n<0?"atraso":n===0?"hoje":n===1?"dia":"dias";return `<div class="dbox ${cls}"><b>${n<0?Math.abs(n):n}</b><small>${lbl}</small></div>`}
+const FASES=["Ideia","Escrevendo o projeto","Inscrito / em análise","Captando recursos","Aprovado","Em produção","Em cartaz","Prestação de contas","Encerrado"];
+const PCORES=["#F14E53","#8B5FBF","#1E4FBF","#FFC857","#2F7D4F","#2E1A33"];
+function pcolor(p){return p.cor||PCORES[Object.keys(S.projects).sort().indexOf(p.id)%PCORES.length]||PCORES[0]}
+function sortedProjects(){return Object.values(S.projects).sort((a,b)=>(a.criado||"").localeCompare(b.criado||"")||a.nome.localeCompare(b.nome))}
+function dirStat(p){return p.tipoDireito!=="licenciada"?["não precisa","ok"]:p.direitos.contrato?["contrato assinado","ok"]:p.direitos.carta?["carta de intenção","ok"]:p.direitos.cotacao?["cotação recebida","warn"]:p.direitos.pedido?["pedido enviado","warn"]:["não pedido","bad"]}
+function nextDeadline(p){return allDeadlines().filter(x=>x.p.id===p.id&&daysTo(x.d)>=0)[0]||null}
+function vPainel(){
+  const ps=sortedProjects();
+  if(!ps.length)return `<h2>Meus projetos</h2>`+emptyProjects();
+  const dl=allDeadlines().slice(0,10);
+  const fixos=EDITAIS.filter(e=>e.prazo&&daysTo(e.prazo)>=0);
+  const allIns=[];ps.forEach(p=>p.inscricoes.forEach(i=>allIns.push({i,p})));
+  const table=`<div class="ptable-wrap"><table class="ptable"><thead><tr><th>Projeto</th><th>Fase</th><th>Direitos</th><th>Texto</th><th>Orçamento</th><th>Documentos</th><th>Inscrições</th><th>Próximo prazo</th></tr></thead><tbody>
+  ${ps.map(p=>{const pct=wizPct(p),ds=dirStat(p),tem=p.docs.filter(d=>d.status==="tenho").length,need=p.docs.filter(d=>d.status!=="na").length,nd=nextDeadline(p);
+   const ap=p.inscricoes.filter(i=>i.status==="aprovada").length;
+   return `<tr style="--pc:${pcolor(p)}">
+   <td data-label="Projeto" class="pname"><a href="#" data-a="go" data-p="${p.id}" data-tab="escrever"><b>${esc(p.nome)}</b></a><small>${esc([p.autor,p.temporada].filter(Boolean).join(" · "))}</small></td>
+   <td data-label="Fase"><select data-proj="${p.id}" data-pfield="fase" aria-label="Fase de ${esc(p.nome)}">${FASES.map(f=>`<option ${p.fase===f?"selected":""}>${f}</option>`).join("")}</select></td>
+   <td data-label="Direitos"><a href="#" data-a="go" data-p="${p.id}" data-tab="direitos" class="pill ${ds[1]}">${ds[0]}</a></td>
+   <td data-label="Texto"><a href="#" data-a="go" data-p="${p.id}" data-tab="escrever" class="minibar" title="${pct}% escrito"><i style="width:${pct}%"></i></a><small>${pct}%</small></td>
+   <td data-label="Orçamento"><a href="#" data-a="go" data-p="${p.id}" data-tab="orcamento">${orcTotal(p)?money(orcTotal(p)):"montar"}</a></td>
+   <td data-label="Documentos"><a href="#" data-a="go" data-p="${p.id}" data-tab="documentos">${need?`${tem}/${need}`:"montar lista"}</a></td>
+   <td data-label="Inscrições"><a href="#" data-a="go" data-p="${p.id}" data-tab="inscricoes">${p.inscricoes.length}${ap?` · <span class="pill ok">${ap} aprovada(s)</span>`:""}</a></td>
+   <td data-label="Próximo prazo">${nd?`<a href="#" data-a="go" data-p="${p.id}" data-tab="${nd.tab}"><b>${daysTo(nd.d)} dias</b><small>${esc(nd.t)}</small></a>`:`<small class="muted">nenhum</small>`}</td></tr>`}).join("")}
+  </tbody></table></div>`;
+  const board=`<div class="board">${STATUS.map(([k,n,c])=>{const L=allIns.filter(x=>(x.i.status||"preparando")===k);return `<div class="col"><div class="colh"><span class="pill ${c}">${n}</span><small>${L.length}</small></div>
+   ${L.map(({i,p})=>`<a href="#" class="kcard" data-a="go" data-p="${p.id}" data-tab="inscricoes" style="--pc:${pcolor(p)}"><b>${esc(i.edital||"Edital sem nome")}</b><small>${esc(p.nome)}${i.prazo?" · "+fmtD(i.prazo):""}</small></a>`).join("")||`<small class="muted">—</small>`}</div>`}).join("")}</div>`;
+  return `<div class="section-title" style="margin-top:0"><div><h2 style="margin:0">Meus projetos</h2><small class="muted">${ps.length} projeto(s) · clique em qualquer item para abrir</small></div><button class="btn" data-a="new">+ Novo projeto</button></div>
+  ${table}
+  <div class="grid g2" style="margin-top:18px">
+   <div class="card"><h3>Próximos prazos — todos os projetos</h3>
+    ${dl.length?dl.map(x=>`<div class="deadline">${dbox(x.d)}<div class="what"><b>${esc(x.t)}</b><small><span class="dotc" style="background:${pcolor(x.p)}"></span>${esc(x.p.nome)} · ${fmtD(x.d)}</small></div><button class="btn sm soft" data-a="go" data-p="${x.p.id}" data-tab="${x.tab}">Abrir</button></div>`).join(""):`<p class="muted">Nenhum prazo cadastrado ainda. Os prazos aparecem aqui quando você preenche Inscrições, Documentos (validade) e Cronograma.</p>`}
+    ${fixos.length?`<div class="callout warn" style="margin-top:12px"><p><b>Datas fixas para lembrar:</b> ${fixos.map(e=>`${esc(e.nome)} — até ${fmtD(e.prazo)} (${daysTo(e.prazo)} dias)`).join("; ")}.</p></div>`:""}
+   </div>
+   <div class="card"><h3>Pendências por projeto</h3>
+    ${ps.map(p=>{const pe=pendencias(p);return `<div style="margin-bottom:10px"><b><span class="dotc" style="background:${pcolor(p)}"></span>${esc(p.nome)}</b>${pe.length?`<ul style="margin:4px 0;padding-left:20px">${pe.map(([t,tab])=>`<li><a href="#" data-a="go" data-p="${p.id}" data-tab="${tab}">${esc(t)}</a></li>`).join("")}</ul>`:` <span class="pill ok">tudo em dia</span>`}</div>`}).join("")}
+   </div>
+  </div>
+  <div class="section-title"><h3>Todas as inscrições</h3><small class="muted">${allIns.length} no total</small></div>
+  ${allIns.length?board:`<p class="muted">Nenhuma inscrição ainda. Adicione pela aba Editais e incentivos.</p>`}`;
+}
+function projStrip(){
+  const ps=sortedProjects();
+  return `<div class="pstrip" role="tablist" aria-label="Projeto"><span class="lbl">Projeto:</span>${ps.map(p=>`<button class="pchip" data-a="pick" data-p="${p.id}" aria-pressed="${p.id===S.cur}" style="--pc:${pcolor(p)}"><span class="dotc" style="background:${pcolor(p)}"></span>${esc(p.nome)}</button>`).join("")}<button class="pchip add" data-a="new">+ novo</button></div>`;
+}
+
+/* ============ 2. DIREITOS ============ */
+function emailEN(p){
+  const tot=(Number(p.sessoesPagas)||0)+(Number(p.sessoesGratis)||0);
+  return `Subject: Performance rights inquiry — "${p.obra||p.nome}" by ${p.autor||"[author]"} (Brazil, Portuguese-language production)
+
+Dear Licensing Team,
+
+My name is [Your Name], and I am a theatre producer based in ${p.cidade||"[city]"}, Brazil. I would like to request the performance rights for "${p.obra||p.nome}" by ${p.autor||"[author]"} for a professional production in Portuguese.
+
+Production details:
+• Venue: ${p.lugares||"[number]"}-seat theatre in ${p.cidade||"[city]"}, Brazil
+• Performances: ${p.sessoesPagas||0} ticketed performances + ${p.sessoesGratis||0} free performances (${tot} in total)${p.temporada?`
+• Period: ${p.temporada}`:""}
+• Language: Portuguese, in a new translation (we would also like authorization to translate the play)
+• Ticket prices: popular pricing (approx. [value] USD)
+• Funding: public cultural funding / tax-incentive programs (e.g., Lei Rouanet)
+
+Could you please let us know:
+1. Whether the rights are available for this territory and period;
+2. The licensing fee or royalty terms;
+3. Whether you could provide a letter of intent or pre-authorization, as Brazilian funding programs require it at the application stage.
+
+Thank you very much for your attention. I look forward to hearing from you.
+
+Best regards,
+[Your Name]
+[Company / CNPJ]
+[Email] · [Phone, with +55]`;
+}
+function emailFollow(p){return `Subject: Follow-up — rights inquiry for "${p.obra||p.nome}"
+
+Dear Licensing Team,
+
+I am following up on my request sent on ${p.direitos.pedido?fmtD(p.direitos.pedido):"[date]"} regarding the performance rights for "${p.obra||p.nome}" by ${p.autor||"[author]"} in ${p.cidade||"[city]"}, Brazil.
+
+Our application deadline for public funding is approaching, so a letter of intent — even conditional on funding and contract signature — would be extremely helpful.
+
+Thank you again for your help.
+
+Best regards,
+[Your Name]`}
+function emailPT(p){return `Assunto: Autorização para montagem — "${p.obra||p.nome}"
+
+Olá,
+
+Meu nome é [Seu nome], sou produtora em ${p.cidade||"[cidade]"}. Gostaria de solicitar autorização para a montagem de "${p.obra||p.nome}", de ${p.autor||"[autor(a)]"}.
+
+• Teatro de ${p.lugares||"[nº]"} lugares em ${p.cidade||"[cidade]"}
+• ${p.sessoesPagas||0} sessões pagas e ${p.sessoesGratis||0} gratuitas${p.temporada?`
+• Período: ${p.temporada}`:""}
+• O projeto será inscrito em editais/leis de incentivo à cultura
+
+Poderiam me informar as condições (percentual sobre bilheteria ou valor fixo) e se é possível emitir uma carta de anuência para a inscrição?
+
+Obrigada,
+[Seu nome] · [telefone] · [e-mail]`}
+function vDireitos(){
+  const p=cur(), d=p.direitos;
+  if(p.tipoDireito!=="licenciada"){
+    return `<h2>Direitos autorais</h2><div class="callout ok"><h3 style="margin-top:0">${p.tipoDireito==="propria"?"Texto próprio: você não precisa de licença":"Domínio público: você não precisa de licença"}</h3>
+    ${p.tipoDireito==="propria"?`<p>O texto é de vocês. Vale registrar a obra (por exemplo, na Biblioteca Nacional ou na SBAT) para ter prova de autoria, e pedir uma declaração assinada do(a) autor(a) autorizando a montagem — alguns editais pedem.</p>`:`<p>No Brasil, a obra entra em domínio público 70 anos depois da morte do autor (contados a partir de 1º de janeiro do ano seguinte). Atenção: se você usar uma <b>tradução</b> já publicada, a tradução tem dono — use uma tradução nova ou peça autorização ao tradutor.</p>`}
+    <p>Se isso mudou, troque o tipo em <a href="#" data-a="edit">Editar ficha</a>.</p></div>`;
+  }
+  const st=[["pedido","Pedido enviado","Mandou o e-mail para a editora/agência."],["cotacao","Cotação recebida","Eles responderam com o valor."],["carta","Carta de intenção","Documento dizendo que pretendem licenciar — é o que o edital pede."],["contrato","Contrato assinado","Assinado e pago (normalmente perto da estreia)."]];
+  const done=st.filter(s=>d[s[0]]).length;
+  return `<h2>Direitos autorais</h2><p class="lead">Para montar uma peça de autor vivo (ou falecido há menos de 70 anos), você precisa de uma licença. Siga os passos e marque a data de cada um.</p>
+  <div class="grid g2" style="margin-top:16px">
+  <div class="card"><h3>Passo a passo</h3><ol class="steps">
+   <li><b>Descubra quem licencia</b>Procure o título no site das editoras de teatro (Concord Theatricals, Dramatists Play Service, Broadway Licensing, MTI). Para autores brasileiros, a SBAT ou o próprio autor.</li>
+   <li><b>Mande o pedido</b>Use o modelo de e-mail abaixo. Pedir cotação é grátis e é um processo normal — eles recebem pedidos assim o tempo todo.</li>
+   <li><b>Receba a cotação</b>Pode levar algumas semanas. Anote o valor e as condições (nº de sessões, lugares, preço do ingresso).</li>
+   <li><b>Peça a carta de intenção</b>É ela que vai no edital. Sem ela, a Rouanet pode aprovar com ressalva, mas é bem melhor ter.</li>
+   <li><b>Assine e pague</b>O pagamento normalmente é feito na assinatura do contrato, muitas vezes cerca de 2 semanas antes da estreia — depois de ter o dinheiro do edital.</li>
+   <li><b>Tradução</b>A licença precisa autorizar a tradução. Coloque o custo da tradução e da licença no Orçamento.</li></ol>
+   <div class="callout"><p><b>Valores de referência:</b> autores estrangeiros pela SBAT costumam cobrar 10–15% da bilheteria. Na Concord, um exemplo para montagem amadora foi US$ 750 para 6 sessões; produção profissional custa mais e é calculada caso a caso. Na Rouanet, direitos de autor podem ser no máximo 10% do valor do projeto.</p></div>
+  </div>
+  <div class="card"><h3>Status — ${esc(p.obra||p.nome)}</h3><div class="progress"><i style="width:${done/4*100}%"></i></div>
+   ${st.map(([k,t,h])=>`<div class="status-row"><input type="checkbox" data-a="dirchk" data-k="${k}" ${d[k]?"checked":""} aria-label="${t}"><div><b>${t}</b><br><small>${h}</small></div><input type="date" data-dir="${k}" value="${esc(d[k])}" aria-label="Data: ${t}"></div>`).join("")}
+   <div class="frow" style="margin-top:12px"><label class="f"><span>Editora / agência</span><input type="text" data-pf="editora" value="${esc(p.editora)}" placeholder="Ex.: Concord Theatricals"></label>
+   <label class="f"><span>Contato (e-mail)</span><input type="text" data-pf="contato" value="${esc(p.contato)}"></label></div>
+   <div class="frow"><label class="f"><span>Valor cotado</span><input type="number" data-dir="valor" value="${esc(d.valor)}"></label>
+   <label class="f"><span>Moeda</span><select data-dir="moeda">${["US$","R$","€","£","% bilheteria"].map(m=>`<option ${d.moeda===m?"selected":""}>${m}</option>`).join("")}</select></label></div>
+   <label class="f"><span>Anotações</span><textarea data-dir="notas" placeholder="Ex.: pediram o preço do ingresso; responder até…">${esc(d.notas)}</textarea></label>
+  </div></div>
+  <div class="section-title"><h3>Modelos de e-mail</h3><small class="muted">Já preenchidos com os dados da ficha. Troque o que estiver entre [colchetes].</small></div>
+  <div class="grid g2">
+   <div class="card"><div class="head" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px"><b>1. Pedido (inglês)</b><button class="btn sm" data-a="copytpl" data-t="en">Copiar</button></div><div class="tpl">${esc(emailEN(p))}</div></div>
+   <div class="card"><div class="head" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px"><b>2. Cobrança / pedir carta (inglês)</b><button class="btn sm" data-a="copytpl" data-t="fu">Copiar</button></div><div class="tpl">${esc(emailFollow(p))}</div></div>
+   <div class="card"><div class="head" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px"><b>3. Autor brasileiro / SBAT (português)</b><button class="btn sm" data-a="copytpl" data-t="pt">Copiar</button></div><div class="tpl">${esc(emailPT(p))}</div></div>
+  </div>`;
+}
+
+/* ============ 3. EDITAIS ============ */
+function vEditais(){
+  const f=S.edFilter; const list=EDITAIS.filter(e=>f==="todos"||e.tipo===f||(f==="sp"&&/SP|São Paulo/.test(e.esfera)));
+  return `<h2>Editais e incentivos</h2><p class="lead">Todos os caminhos para financiar um espetáculo. Existem dois tipos: os que <b>pagam direto</b> e os de <b>captação</b> (você aprova o projeto e depois precisa achar patrocinador).</p>
+  <div class="callout warn"><p>Datas e regras mudam a cada ano. Antes de se inscrever, leia sempre o edital oficial.</p></div>
+  <div class="filters">${[["todos","Todos"],["direto","Pagam direto"],["captacao","Precisam de captação"],["sp","São Paulo"]].map(([k,n])=>`<button class="chip" data-a="edf" data-f="${k}" aria-pressed="${f===k}">${n}</button>`).join("")}</div>
+  <div class="grid g2">${list.map(e=>`<div class="card edital"><h3><span>${esc(e.nome)}</span><span class="pill ${e.tipo==="direto"?"ok":"warn"}">${e.tipo==="direto"?"paga direto":"captação"}</span></h3>
+   <small>${esc(e.esfera)}</small>
+   <dl><dt>Como funciona</dt><dd>${esc(e.como)}</dd><dt>Dinheiro</dt><dd>${esc(e.dinheiro)}</dd><dt>Requisitos</dt><dd>${esc(e.requisitos)}</dd><dt>Quando</dt><dd>${esc(e.periodo)}</dd><dt>Para quem</dt><dd>${esc(e.paraQuem)}</dd></dl>
+   <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">${cur()?`<button class="btn sm" data-a="addins" data-e="${e.id}">+ Adicionar às inscrições de ${esc(cur().nome)}</button>`:""}${e.link?`<a class="btn sm soft" href="${e.link}" target="_blank" rel="noopener">Site oficial ↗</a>`:""}</div></div>`).join("")}</div>`;
+}
+
+/* ============ 4. INSCRIÇÕES ============ */
+const STATUS=[["preparando","Preparando",""],["enviada","Enviada","info"],["analise","Em análise","warn"],["aprovada","Aprovada","ok"],["recusada","Recusada","bad"]];
+function vInscricoes(){
+  const p=cur(); const L=[...p.inscricoes].sort((a,b)=>(a.prazo||"9").localeCompare(b.prazo||"9"));
+  return `<h2>Inscrições — ${esc(p.nome)}</h2><p class="lead">Cada edital em que você vai se inscrever com este projeto. Dica: adicione direto da aba <a href="#" data-a="tab" data-tab="editais">Editais e incentivos</a>.</p>
+  <div class="section-title"><span class="muted">${L.length} inscrição(ões)</span><button class="btn" data-a="addins">+ Nova inscrição</button></div>
+  ${L.length?L.map(i=>{const n=daysTo(i.prazo);const s=STATUS.find(x=>x[0]===i.status)||STATUS[0];return `<div class="item">
+   <div class="head"><b style="font-size:1.05rem">${esc(i.edital||"Edital sem nome")}</b><span style="display:flex;gap:6px;align-items:center"><span class="pill ${s[2]}">${s[1]}</span>${i.prazo&&i.status==="preparando"?`<span class="pill ${n<0?"bad":n<=14?"coral":""}">${n<0?"prazo passou":n===0?"é hoje!":"faltam "+n+" dias"}</span>`:""}<button class="x" data-a="del" data-l="inscricoes" data-id="${i.id}" aria-label="Apagar">✕</button></span></div>
+   <div class="frow"><label class="f"><span>Edital</span><input type="text" list="edlist" data-l="inscricoes" data-id="${i.id}" data-f="edital" value="${esc(i.edital)}"></label>
+   <label class="f"><span>Prazo</span><input type="date" data-l="inscricoes" data-id="${i.id}" data-f="prazo" value="${esc(i.prazo)}"></label>
+   <label class="f"><span>Status</span><select data-l="inscricoes" data-id="${i.id}" data-f="status">${STATUS.map(x=>`<option value="${x[0]}" ${i.status===x[0]?"selected":""}>${x[1]}</option>`).join("")}</select></label>
+   <label class="f"><span>Valor pedido (R$)</span><input type="number" data-l="inscricoes" data-id="${i.id}" data-f="valor" value="${esc(i.valor)}"></label></div>
+   <div class="frow"><label class="f"><span>O que falta</span><textarea style="min-height:70px" data-l="inscricoes" data-id="${i.id}" data-f="falta" placeholder="Ex.: carta de intenção, certidão municipal">${esc(i.falta)}</textarea></label>
+   <label class="f"><span>Resultado / observações</span><textarea style="min-height:70px" data-l="inscricoes" data-id="${i.id}" data-f="resultado" placeholder="Ex.: nº do Pronac, nota, motivo da recusa">${esc(i.resultado)}</textarea></label></div></div>`}).join(""):`<div class="empty"><h3>Nenhuma inscrição ainda</h3><p>Escolha os editais na aba Editais e incentivos ou crie uma inscrição agora.</p><button class="btn" data-a="addins">+ Nova inscrição</button></div>`}
+  <datalist id="edlist">${EDITAIS.map(e=>`<option value="${esc(e.nome)}">`).join("")}</datalist>`;
+}
+
+/* ============ 5. ESCREVENDO (wizard) ============ */
+function distCalc(p){
+  const d=p.dist, ses=(Number(p.sessoesPagas)||0)+(Number(p.sessoesGratis)||0), total=(Number(p.lugares)||0)*ses;
+  const pc=k=>Number(d[k])||0;
+  const livre=100-pc("social")-pc("patroc")-pc("divulg")-pc("popular");
+  const n=x=>Math.round(total*x/100);
+  const freeShare=ses?(Number(p.sessoesGratis)||0)/ses*100:0;
+  const occ=(Number(p.ocupacao)||0)/100, f=1-((Number(p.meia)||0)/100)*0.5;
+  const receita=(n(pc("popular"))*pc("precoPop")+n(Math.max(0,livre))*pc("precoLivre"))*occ*f;
+  const formativa=Math.min(500,Math.max(20,Math.round(total*0.1)));
+  const erros=[];
+  if(pc("social")<10)erros.push("Gratuito social/educativo precisa ser no mínimo 10%.");
+  if(pc("social")+0.01<freeShare)erros.push(`Suas sessões gratuitas já somam ${freeShare.toFixed(0)}% dos ingressos — o gratuito social precisa ser pelo menos isso.`);
+  if(pc("patroc")>10)erros.push("Patrocinador: no máximo 10%.");
+  if(pc("divulg")>10)erros.push("Divulgação: no máximo 10%.");
+  if(pc("popular")<20)erros.push("Preço popular: no mínimo 20% dos ingressos.");
+  if(pc("precoPop")>50)erros.push("O preço popular precisa ser de até R$ 50.");
+  if(pc("precoLivre")>250)erros.push("O preço médio da faixa livre precisa ser de até R$ 250.");
+  if(livre<0)erros.push("Os percentuais passam de 100%.");
+  return {total,ses,livre,n,freeShare,receita,formativa,erros};
+}
+function distTexto(p){
+  const c=distCalc(p), d=p.dist, fm=x=>x.toLocaleString("pt-BR");
+  return `Produto principal: espetáculo teatral. ${fm(c.total)} ingressos (${p.lugares} lugares × ${c.ses} sessões):
+• Distribuição gratuita social/educativa: ${fm(c.n(d.social))} (${d.social}%)
+• Distribuição para patrocinador: ${fm(c.n(d.patroc))} (${d.patroc}%)
+• Distribuição em ações de divulgação: ${fm(c.n(d.divulg))} (${d.divulg}%)
+• Venda a preço popular (R$ ${d.precoPop}): ${fm(c.n(d.popular))} (${d.popular}%)
+• Venda a critério do proponente (preço médio R$ ${d.precoLivre}): ${fm(c.n(c.livre))} (${c.livre}%)
+Meia-entrada conforme a legislação.`;
+}
+function distWidget(p){
+  const c=distCalc(p), d=p.dist, fm=x=>x.toLocaleString("pt-BR");
+  const row=(k,label,rule)=>`<tr><td>${label}<br><small class="muted">${rule}</small></td><td><input type="number" min="0" max="100" data-dist="${k}" value="${esc(d[k])}" style="width:80px" aria-label="${label} %"></td><td class="num">${fm(c.n(d[k]))}</td></tr>`;
+  return `<div class="card" id="distbox" style="margin-top:14px"><h3>Plano de distribuição</h3>
+  <p class="muted" style="margin-top:0">${fm(c.total)} ingressos no total (${esc(p.lugares)} lugares × ${c.ses} sessões). Suas sessões gratuitas = ${c.freeShare.toFixed(0)}% dos ingressos.</p>
+  <table class="dtable"><thead><tr><th>Categoria</th><th>%</th><th class="num">Ingressos</th></tr></thead><tbody>
+  ${row("social","Gratuito social/educativo","mínimo 10%")}
+  ${row("patroc","Patrocinador","até 10%")}
+  ${row("divulg","Divulgação","até 10%")}
+  ${row("popular","Preço popular","mínimo 20%, até R$ 50")}
+  <tr><td>Preço livre<br><small class="muted">o que sobra · preço médio até R$ 250</small></td><td><b>${c.livre}%</b></td><td class="num">${fm(c.n(Math.max(0,c.livre)))}</td></tr>
+  </tbody></table>
+  <div class="frow" style="margin-top:10px"><label class="f"><span>Preço popular (R$)</span><input type="number" data-dist="precoPop" value="${esc(d.precoPop)}"></label>
+  <label class="f"><span>Preço médio da faixa livre (R$)</span><input type="number" data-dist="precoLivre" value="${esc(d.precoLivre)}"></label>
+  <label class="f"><span>Ocupação esperada (%)</span><input type="number" data-pf="ocupacao" value="${esc(p.ocupacao)}"></label>
+  <label class="f"><span>Meia-entrada estimada (%)</span><input type="number" data-pf="meia" value="${esc(p.meia)}"></label></div>
+  ${c.erros.length?c.erros.map(e=>`<div class="callout bad"><p>${esc(e)}</p></div>`).join(""):`<div class="callout ok"><p>O plano segue as regras da Rouanet. Receita estimada de bilheteria: <b>${money(c.receita)}</b>. Ação formativa: pelo menos <b>${fm(c.formativa)}</b> beneficiários (10% dos ingressos, mínimo 20, máximo 500).</p></div>`}
+  <small class="muted">Lugares e número de sessões vêm da ficha do projeto.</small></div>`;
+}
+function fullText(p){return WIZ.map((s,i)=>`${i+1}. ${s.t.toUpperCase()}\n[Salic: ${s.salic}]\n\n${(p.texto[s.k]||"").trim()||"[a preencher]"}`).join("\n\n\n")}
+function stepDone(p,s){return (p.texto[s.k]||"").trim().length>=Math.min(60,s.min)}
+function vEscrever(){
+  const p=cur(); const last=WIZ.length; const i=Math.min(S.step,last);
+  const done=WIZ.filter(s=>stepDone(p,s)).length;
+  const nav=`<nav aria-label="Etapas">${WIZ.map((s,j)=>{const ok=stepDone(p,s);return `<button data-a="step" data-s="${j}" ${j===i?'aria-current="step"':""}><span class="dot ${ok?"done":""}">${ok?"✓":j+1}</span>${esc(s.t)}</button>`}).join("")}<button data-a="step" data-s="${last}" ${i===last?'aria-current="step"':""}><span class="dot">★</span>Texto completo</button></nav>`;
+  const mob=`<div class="wiz-mobile"><label class="f"><span>Ir para a etapa</span><select data-a="stepsel">${WIZ.map((s,j)=>`<option value="${j}" ${j===i?"selected":""}>${j+1}. ${esc(s.t)}</option>`).join("")}<option value="${last}" ${i===last?"selected":""}>★ Texto completo</option></select></label></div>`;
+  let body;
+  if(i===last){
+    body=`<div class="stepnum">Final</div><h2>Texto completo</h2><p>Tudo junto, na ordem do Salic. Cada parte mostra em qual campo colar.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0"><button class="btn" data-a="copyall">Copiar tudo</button><button class="btn soft" data-a="step" data-s="0">Voltar ao início</button></div>
+    ${done<WIZ.length?`<div class="callout warn"><p>Ainda faltam ${WIZ.length-done} etapa(s). Elas aparecem como [a preencher].</p></div>`:`<div class="callout ok"><p>Todas as etapas têm texto. Agora revise em voz alta e peça para alguém ler.</p></div>`}
+    <div class="callout"><p><b>Além do texto, o Salic pede:</b> orçamento item a item (aba Orçamento), documentos em PDF (aba Documentos), agência do Banco do Brasil e portfólio cadastrado.</p></div>
+    <div class="tpl" style="max-height:none;font-family:var(--text);font-size:.97rem">${esc(fullText(p))}</div>`;
+  } else {
+    const s=WIZ[i], val=p.texto[s.k]||"";
+    const c=distCalc(p);
+    body=`<div class="stepnum">Etapa ${i+1} de ${WIZ.length}</div><h2>${esc(s.t)}</h2>
+    <div class="pill info" style="margin-bottom:6px;white-space:normal">No Salic: ${esc(s.salic)}</div>
+    <div class="box what"><h4>O que é</h4><p>${esc(s.what)}</p></div>
+    ${s.k==="contrapartida"?`<div class="callout"><p>Para este projeto: ${c.total.toLocaleString("pt-BR")} ingressos → pelo menos <b>${c.formativa.toLocaleString("pt-BR")} beneficiários</b> na ação formativa.</p></div>`:""}
+    <div class="box what"><h4>Responda para você mesma</h4><ul>${s.ask.map(a=>`<li>${esc(a)}</li>`).join("")}</ul></div>
+    ${s.calc?distWidget(p):""}
+    <div class="box ex"><h4>Exemplo</h4><p style="white-space:pre-line">${esc(s.ex)}</p></div>
+    <div class="box tip"><h4>Dicas do avaliador</h4><ul>${s.tips.map(a=>`<li>${esc(a)}</li>`).join("")}</ul></div>
+    <label class="f" style="margin-top:14px"><span style="font-size:1rem;color:var(--ink)">Seu texto</span><textarea id="wizta" data-step="${s.k}" style="min-height:220px" placeholder="Escreva aqui. Pode começar com tópicos e depois transformar em texto.">${esc(val)}</textarea></label>
+    <div class="counter" id="wizcount"></div>
+    ${s.calc?`<button class="btn sm soft" data-a="puxadist">Inserir o resumo da calculadora no texto</button>`:""}
+    ${s.k==="publico"?`<button class="btn sm soft" data-a="puxapub">Inserir a conta de público com os dados da ficha</button>`:""}
+    <div class="wiznav"><button class="btn soft" data-a="step" data-s="${i-1}" ${i===0?"disabled style='visibility:hidden'":""}>← Anterior</button><button class="btn" data-a="step" data-s="${i+1}">${i===WIZ.length-1?"Ver texto completo ★":"Próximo →"}</button></div>`;
+  }
+  setTimeout(updCounter,0);
+  return `<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:10px;flex-wrap:wrap"><div><h2 style="margin:0">Escrevendo o projeto</h2><small class="muted">${esc(p.nome)} · ${done} de ${WIZ.length} etapas escritas · na ordem do Salic (Lei Rouanet)</small></div></div>
+  <div class="progress"><i style="width:${done/WIZ.length*100}%"></i></div>
+  <div class="wiz">${nav}<div>${mob}<div class="card">${body}</div></div></div>`;
+}
+function updCounter(){
+  const ta=document.getElementById("wizta"),c=document.getElementById("wizcount"); if(!ta||!c)return;
+  const s=WIZ.find(x=>x.k===ta.dataset.step), n=ta.value.trim().length;
+  c.textContent=`${n} caracteres · sugerido: ${s.min}–${s.max}`; c.className="counter "+(n===0?"":n<s.min?"low":n>s.max?"low":"good");
+}
+
+function refreshDist(){const b=document.getElementById("distbox");if(b){b.outerHTML=distWidget(cur())}if(S.tab==="orcamento")updateBudget()}
+/* ============ 6. ORÇAMENTO ============ */
+function rowVal(r){return (Number(r.qtd)||0)*(Number(r.ocorr??1)||0)*(Number(r.valor)||0)}
+function vOrcamento(){
+  const p=cur();
+  return `<h2>Orçamento — ${esc(p.nome)}</h2><p class="lead">Preencha quantidade, ocorrência e valor de cada item, como no Salic. Os totais e os alertas da Rouanet se atualizam sozinhos.</p>
+  ${!p.orcamento.length?`<div class="empty" style="margin:16px 0"><h3>Orçamento vazio</h3><p>Comece com a lista de itens mais comuns de uma montagem de teatro. Depois apague o que não usar e ajuste os valores.</p><button class="btn" data-a="orcsug">Carregar itens sugeridos</button></div>`:""}
+  <div class="totals" style="margin-top:14px"><div class="stat big"><small>Total do projeto</small><b id="tTotal">—</b></div><div class="stat"><small>Receita estimada de bilheteria</small><b id="tRec">—</b></div><div class="stat"><small>Custo por ingresso (máx. R$ 300)</small><b id="tPer">—</b></div></div>
+  <div class="card" style="margin-top:14px"><b>Remuneração do proponente</b><p class="muted" style="margin:4px 0 8px">Quanto deste orçamento é pago a você (cachês e serviços seus somados)? Limite: 30% para pessoa física ou MEI, 20% para outras PJ.</p>
+   <label class="f" style="max-width:260px"><span>Valor pago a você (R$)</span><input type="number" data-pf="valorProponente" value="${esc(p.valorProponente)}"></label></div>
+  <div id="distwrap">${distWidget(p)}</div>
+  <div id="alerts"></div>
+  ${ORC_CATS.map(c=>{const rows=p.orcamento.filter(r=>r.cat===c.k);return `<div class="cat"><div class="ch"><span>${c.n}</span><span><span id="sub-${c.k}">—</span> <button class="btn sm soft" data-a="orcadd" data-c="${c.k}">+ item</button></span></div>
+   <table class="btable"><thead><tr><th>Item</th><th class="w-qtd">Qtd</th><th class="w-qtd">Ocorr.</th><th class="w-un">Unidade</th><th class="w-val">Valor unit. (R$)</th><th class="w-un">Fonte</th><th class="num">Subtotal</th><th></th></tr></thead><tbody>
+   ${rows.map(r=>`<tr><td class="it"><input type="text" data-l="orcamento" data-id="${r.id}" data-f="item" value="${esc(r.item)}" aria-label="Item"></td>
+   <td class="q"><input class="w-qtd" type="number" min="0" data-l="orcamento" data-id="${r.id}" data-f="qtd" value="${esc(r.qtd)}" aria-label="Quantidade" title="Quantidade"></td>
+   <td class="o"><input class="w-qtd" type="number" min="0" data-l="orcamento" data-id="${r.id}" data-f="ocorr" value="${esc(r.ocorr??1)}" aria-label="Ocorrência" title="Ocorrência (quantas vezes se repete)"></td>
+   <td class="u"><select class="w-un" data-l="orcamento" data-id="${r.id}" data-f="un" aria-label="Unidade">${["serviço","mês","semana","verba","unidade","cachê"].concat(["serviço","mês","semana","verba","unidade","cachê"].includes(r.un)||!r.un?[]:[r.un]).map(u=>`<option ${r.un===u?"selected":""}>${u}</option>`).join("")}</select></td>
+   <td class="v"><input class="w-val" type="number" min="0" step="0.01" data-l="orcamento" data-id="${r.id}" data-f="valor" value="${esc(r.valor)}" aria-label="Valor unitário"></td>
+   <td class="fo"><select class="w-un" data-l="orcamento" data-id="${r.id}" data-f="fonte" aria-label="Fonte de recurso">${FONTES.map(f=>`<option ${r.fonte===f?"selected":""}>${f}</option>`).join("")}</select></td>
+   <td class="num s" id="st-${r.id}">—</td><td class="xx"><button class="x" data-a="del" data-l="orcamento" data-id="${r.id}" aria-label="Apagar item">✕</button></td></tr>`).join("")||`<tr><td colspan="8" class="muted" style="padding:10px">Nenhum item.</td></tr>`}
+   </tbody></table></div>`}).join("")}`;
+}
+function updateBudget(){
+  const p=cur(); if(!p||S.tab!=="orcamento")return;
+  const sub={}; ORC_CATS.forEach(c=>sub[c.k]=0);
+  p.orcamento.forEach(r=>{const v=rowVal(r);sub[r.cat]=(sub[r.cat]||0)+v;const el=document.getElementById("st-"+r.id);if(el)el.textContent=money(v)});
+  const tot=Object.values(sub).reduce((a,b)=>a+b,0);
+  ORC_CATS.forEach(c=>{const el=document.getElementById("sub-"+c.k);if(el)el.textContent=money(sub[c.k])+(tot?` · ${Math.round(sub[c.k]/tot*100)}%`:"")});
+  const dc=distCalc(p);
+  document.getElementById("tTotal").textContent=money(tot);
+  document.getElementById("tRec").textContent=money(dc.receita);
+  document.getElementById("tPer").textContent=dc.total?money(tot/dc.total):"—";
+  const A=[], pct=x=>Math.round(x/tot*1000)/10;
+  if(tot){
+    if((sub.div+sub.acc)/tot>.2)A.push(["bad",`Acessibilidade + comunicação e divulgação estão em ${pct(sub.div+sub.acc)}%. Na Rouanet o limite é 20% somando as duas.`]);
+    if(sub.adm/tot>.15)A.push(["bad",`Custos administrativos estão em ${pct(sub.adm)}%. Limite: 15%.`]);
+    if(sub.cap/tot>.10||sub.cap>150000)A.push(["bad",`Remuneração de captação está em ${pct(sub.cap)}% (${money(sub.cap)}). Limite: 10% do projeto e no máximo R$ 150 mil.`]);
+    if(sub.dir/tot>.10)A.push(["bad",`Direitos autorais e tradução estão em ${pct(sub.dir)}%. Na Rouanet, direitos de autor podem ser no máximo 10% do valor do projeto (se a tradução pesar aqui, mova-a para Pré-produção).`]);
+    const vp=Number(p.valorProponente)||0, lim=(p.proponente==="PJ")?.2:.3;
+    if(vp/tot>lim)A.push(["bad",`O valor pago a você está em ${pct(vp)}%. Limite para ${p.proponente}: ${lim*100}%.`]);
+    if(dc.total&&tot/dc.total>300)A.push(["bad",`Custo de ${money(tot/dc.total)} por ingresso. Limite na Rouanet: R$ 300 por pessoa beneficiada.`]);
+    if(!sub.acc)A.push(["warn","Nenhum custo de acessibilidade (Libras, audiodescrição). É obrigatório."]);
+    if(p.tipoDireito==="licenciada"&&!sub.dir)A.push(["warn","Você precisa de licença, mas não colocou valor de direitos autorais."]);
+    const limProj=p.proponente==="PF"?500000:1500000;
+    if(tot>limProj)A.push(["bad",`Total acima de ${money(limProj)}, o limite por projeto para ${p.proponente==="PF"?"pessoa física":"pessoa jurídica"}.`]);
+    if(p.primeiraVez&&tot>200000)A.push(["warn","Total acima de R$ 200 mil no seu primeiro projeto: você vai precisar comprovar portfólio no Salic."]); 
+    const zero=p.orcamento.filter(r=>!rowVal(r)).length; if(zero)A.push(["warn",`${zero} item(ns) sem valor. Preencha ou apague.`]);
+  }
+  if(!A.length&&tot)A.push(["ok","Nenhum alerta. Guarde 3 orçamentos de fornecedores para os itens maiores — o Salic pede justificativa para valores acima da média."]);
+  document.getElementById("alerts").innerHTML=A.map(([c,t])=>`<div class="callout ${c}"><p>${esc(t)}</p></div>`).join("");
+}
+
+/* ============ 7. DOCUMENTOS ============ */
+function vDocumentos(){
+  const p=cur(); const t=p.docs.filter(d=>d.status==="tenho").length, f=p.docs.filter(d=>d.status==="falta").length;
+  return `<h2>Documentos — ${esc(p.nome)}</h2><p class="lead">Marque o que você já tem e o que falta. Certidões vencem — coloque a data de validade para receber o aviso no Painel.</p>
+  <div class="section-title"><span><span class="pill ok">${t} tenho</span> <span class="pill coral">${f} falta</span></span><span style="display:flex;gap:8px;flex-wrap:wrap">${p.docs.length&&DOC_SUG.some(([n])=>!p.docs.find(d=>d.nome===n))?`<button class="btn soft" data-a="docsug">Adicionar itens sugeridos que faltam</button>`:""}<button class="btn" data-a="docadd">+ Documento</button></span></div>
+  ${p.docs.length?`<div class="card">${p.docs.map(d=>{const n=daysTo(d.vence);return `<div class="docrow"><input type="text" data-l="docs" data-id="${d.id}" data-f="nome" value="${esc(d.nome)}" aria-label="Documento">
+   <div class="seg" role="group"><button class="t" data-a="docst" data-id="${d.id}" data-v="tenho" aria-pressed="${d.status==="tenho"}">Tenho</button><button class="f" data-a="docst" data-id="${d.id}" data-v="falta" aria-pressed="${d.status==="falta"}">Falta</button><button class="na" data-a="docst" data-id="${d.id}" data-v="na" aria-pressed="${d.status==="na"}">N/A</button></div>
+   <label style="display:flex;flex-direction:column;font-size:.75rem;color:var(--ink-soft)">vence em<input type="date" data-l="docs" data-id="${d.id}" data-f="vence" value="${esc(d.vence)}"></label>
+   <span style="display:flex;gap:6px;align-items:center">${d.vence?`<span class="pill ${n<0?"bad":n<=30?"warn":"ok"}">${n<0?"vencido":n+" dias"}</span>`:""}<button class="x" data-a="del" data-l="docs" data-id="${d.id}" aria-label="Apagar">✕</button></span></div>`}).join("")}</div>`:`<div class="empty"><h3>Lista vazia</h3><p>Carregue a lista com os documentos que os editais mais pedem.</p><button class="btn" data-a="docsug">Carregar lista sugerida</button></div>`}`;
+}
+
+/* ============ 8. CRONOGRAMA ============ */
+function nextOct31(){const t=today();let d=new Date(t.getFullYear(),9,31);if(d<t)d=new Date(t.getFullYear()+1,9,31);return d}
+function cronoSug(p){
+  const t=today(); const E=pd(p.estreia)||addMonths(t,12);
+  const r=(etapa,a,b)=>({id:uid("c"),etapa,inicio:iso(a),fim:iso(b),feito:false});
+  const L=[];
+  if(p.tipoDireito==="licenciada")L.push(r("Pedir licença e carta de intenção",t,addDays(t,30)));
+  L.push(r("Escrever o projeto",t,addDays(t,25)));
+  const o=nextOct31(); if(o<E)L.push(r("Inscrição na Rouanet (até 31/10)",addDays(o,-14),o));
+  {const cs=addMonths(E,-11);L.push(r("Captação / resultado dos editais",cs<t?t:cs,addMonths(E,-4)))}
+  if(p.tipoDireito==="licenciada")L.push(r("Tradução",addMonths(E,-9),addMonths(E,-5)));
+  L.push(r("Elenco e equipe",addMonths(E,-5),addMonths(E,-4)));
+  L.push(r("Pré-produção (cenário, figurino)",addMonths(E,-4),addMonths(E,-1)));
+  L.push(r("Ensaios",addDays(E,-70),addDays(E,-1)));
+  L.push(r("Divulgação e imprensa",addDays(E,-42),addDays(E,63)));
+  L.push(r("Temporada 1 (4 semanas)",E,addDays(E,27)));
+  L.push(r("Temporada 2 (4 semanas)",addDays(E,35),addDays(E,62)));
+  L.push(r("Pós-produção e prestação de contas (até 60 dias)",addDays(E,63),addDays(E,120)));
+  return L;
+}
+function vCronograma(){
+  const p=cur(); const L=[...p.crono].sort((a,b)=>(a.inicio||"9").localeCompare(b.inicio||"9"));
+  const dated=L.filter(c=>c.inicio&&c.fim);
+  let gantt="";
+  if(dated.length){
+    let a=pd(dated.reduce((m,c)=>c.inicio<m?c.inicio:m,dated[0].inicio)), b=pd(dated.reduce((m,c)=>c.fim>m?c.fim:m,dated[0].fim));
+    a=new Date(a.getFullYear(),a.getMonth(),1); b=new Date(b.getFullYear(),b.getMonth()+1,1);
+    const span=b-a; const months=[]; for(let d=new Date(a);d<b;d=addMonths(d,1))months.push(d.toLocaleDateString("pt-BR",{month:"short"}).replace(".","")+"/"+String(d.getFullYear()).slice(2));
+    const tp=(today()-a)/span*100;
+    gantt=`<div class="gantt"><div class="gantt-inner"><div class="grow" style="border:0"><div></div><div class="gmonths">${months.map(m=>`<div>${m}</div>`).join("")}</div></div>
+    ${dated.map(c=>{const l=(pd(c.inicio)-a)/span*100,w=Math.max(.8,(pd(c.fim)-pd(c.inicio)+864e5)/span*100);const late=!c.feito&&daysTo(c.fim)<0;return `<div class="grow"><div class="gl" title="${esc(c.etapa)}">${c.feito?"✓ ":""}${esc(c.etapa)}</div><div class="gtrack">${tp>=0&&tp<=100?`<div class="today" style="left:${tp}%"></div>`:""}<div class="gbar ${c.feito?"done":late?"late":""}" style="left:${l}%;width:${w}%" title="${fmtD(c.inicio)} – ${fmtD(c.fim)}"></div></div></div>`}).join("")}
+    </div></div><small class="muted">Linha amarela = hoje. Roxo = planejado · verde = feito · coral = atrasado.</small>`;
+  }
+  return `<h2>Cronograma — ${esc(p.nome)}</h2><p class="lead">As etapas do projeto no tempo. ${p.estreia?`Estreia prevista: <b>${fmtD(p.estreia)}</b>.`:`Dica: coloque a data de estreia na <a href="#" data-a="edit">ficha</a> para as sugestões ficarem certas.`}</p>
+  ${!L.length?`<div class="empty" style="margin:16px 0"><h3>Cronograma vazio</h3><p>Gere as etapas típicas de uma montagem, calculadas a partir da data de estreia. Depois ajuste.</p><button class="btn" data-a="cronosug">Gerar etapas sugeridas</button></div>`:gantt}
+  <div class="section-title"><h3>Etapas</h3><button class="btn" data-a="cronoadd">+ Etapa</button></div>
+  ${L.length?`<div class="card">${L.map(c=>`<div class="cronorow"><input type="checkbox" data-a="cronochk" data-id="${c.id}" ${c.feito?"checked":""} aria-label="Feito">
+   <input type="text" data-l="crono" data-id="${c.id}" data-f="etapa" value="${esc(c.etapa)}" aria-label="Etapa">
+   <label class="cr-d" style="font-size:.75rem;color:var(--ink-soft)">início<input type="date" data-l="crono" data-id="${c.id}" data-f="inicio" value="${esc(c.inicio)}"></label>
+   <label class="cr-d" style="font-size:.75rem;color:var(--ink-soft)">fim<input type="date" data-l="crono" data-id="${c.id}" data-f="fim" value="${esc(c.fim)}"></label>
+   <button class="x" data-a="del" data-l="crono" data-id="${c.id}" aria-label="Apagar">✕</button></div>`).join("")}</div>`:""}`;
+}
+
+/* ============ EVENTOS ============ */
+document.addEventListener("click",e=>{
+  const t=e.target.closest("[data-a],[data-tab]"); if(!t)return;
+  const a=t.dataset.a, p=cur();
+  if(!a&&t.dataset.tab){S.tab=t.dataset.tab;saveUI();render();window.scrollTo(0,0);return}
+  if(t.tagName==="A")e.preventDefault();
+  switch(a){
+    case "mclose":closeModal();break;
+    case "new":projectForm(null,true);break;
+    case "edit":p&&projectForm(p,false);break;
+    case "delproj":askConfirm(`Apagar o projeto "${p.nome}" e tudo dentro dele? Não dá para desfazer.`,()=>{const id=p.id;delete S.projects[id];dirty.delete(id);saveLocal();if(cloud)coll.doc(id).delete().catch(console.warn);S.cur=Object.keys(S.projects)[0]||null;saveUI();render();toast("Projeto apagado")});break;
+    case "dupproj":{const c=normalize(JSON.parse(JSON.stringify(p)));c.id=uid("p");c.nome=p.nome+" (cópia)";c.criado=iso(new Date());c.cor="";c.inscricoes=[];S.projects[c.id]=c;S.cur=c.id;touch(c.id);saveUI();closeModal();render();toast("Projeto duplicado (sem as inscrições)");break}
+    case "pick":S.cur=t.dataset.p;saveUI();render();break;
+    case "go":S.cur=t.dataset.p;S.tab=t.dataset.tab;saveUI();render();window.scrollTo(0,0);break;
+    case "tab":S.tab=t.dataset.tab;saveUI();render();window.scrollTo(0,0);break;
+    case "edf":S.edFilter=t.dataset.f;saveUI();render();break;
+    case "addins":{const ed=EDITAIS.find(x=>x.id===t.dataset.e);p.inscricoes.push({id:uid("i"),edital:ed?ed.nome:"",prazo:ed?ed.prazo:"",status:"preparando",valor:"",falta:"",resultado:""});touch();if(ed){toast("Adicionado às inscrições");S.tab="inscricoes";saveUI();window.scrollTo(0,0)}render();break}
+    case "del":askConfirm("Apagar este item?",()=>{p[t.dataset.l]=p[t.dataset.l].filter(x=>x.id!==t.dataset.id);touch();render()});break;
+    case "dirchk":{const k=t.dataset.k;p.direitos[k]=t.checked?(p.direitos[k]||iso(new Date())):"";touch();render();break}
+    case "copytpl":copy(({en:emailEN,fu:emailFollow,pt:emailPT})[t.dataset.t](p));break;
+    case "step":{const s=Number(t.dataset.s);if(s<0)break;S.step=s;saveUI();render();window.scrollTo(0,0);break}
+    case "copyall":copy(fullText(p));break;
+    case "puxadist":{const ta=document.getElementById("wizta");ta.value=(ta.value?ta.value+"\n\n":"")+distTexto(p);p.texto.distribuicao=ta.value;touch();updCounter();break}
+    case "puxapub":{const pub=Math.round((p.lugares*(p.sessoesPagas+p.sessoesGratis))*(p.ocupacao||70)/100);const ta=document.getElementById("wizta");ta.value=(ta.value?ta.value+"\n\n":"")+`Estimativa: ${p.lugares} lugares × ${p.sessoesPagas+p.sessoesGratis} sessões × ${p.ocupacao||70}% de ocupação ≈ ${pub.toLocaleString("pt-BR")} espectadores.`;p.texto.publico=ta.value;touch();updCounter();break}
+    case "orcsug":p.orcamento=ORC_SUG.map(([cat,item,un])=>({id:uid("o"),cat,item,qtd:1,ocorr:1,un,valor:"",fonte:FONTES[0]}));touch();render();break;
+    case "orcadd":p.orcamento.push({id:uid("o"),cat:t.dataset.c,item:"",qtd:1,ocorr:1,un:"serviço",valor:"",fonte:FONTES[0]});touch();render();break;
+    case "docsug":{const have=new Set(p.docs.map(d=>d.nome));DOC_SUG.forEach(([nome])=>{if(!have.has(nome))p.docs.push({id:uid("d"),nome,status:"falta",vence:""})});touch();render();toast("Lista atualizada");break}
+    case "docadd":p.docs.push({id:uid("d"),nome:"",status:"falta",vence:""});touch();render();break;
+    case "docst":{const d=p.docs.find(x=>x.id===t.dataset.id);d.status=t.dataset.v;touch();render();break}
+    case "cronosug":p.crono=cronoSug(p);touch();render();break;
+    case "cronoadd":p.crono.push({id:uid("c"),etapa:"Nova etapa",inicio:"",fim:"",feito:false});touch();render();break;
+    case "cronochk":{const c=p.crono.find(x=>x.id===t.dataset.id);c.feito=t.checked;touch();render();break}
+  }
+});
+document.addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.classList&&e.target.classList.contains("projcard"))e.target.click()});
+function onField(e,commit){
+  const el=e.target; if(!el.closest("#view"))return;
+  if(el.dataset.proj){const q=S.projects[el.dataset.proj];if(q){q[el.dataset.pfield]=el.value;touch(q.id)}return}
+  const p=cur(); if(!p)return;
+  if(el.dataset.step){p.texto[el.dataset.step]=el.value;touch();updCounter();return}
+  if(el.dataset.dist){p.dist[el.dataset.dist]=el.value===""?"":Number(el.value);touch();if(commit)refreshDist();else if(S.tab==="orcamento")updateBudget();return}
+  if(el.dataset.pf){const k=el.dataset.pf;p[k]=el.type==="number"?(el.value===""?"":Number(el.value)):el.value;touch();if(S.tab==="orcamento")updateBudget();if(commit&&(k==="ocupacao"||k==="meia"))refreshDist();return}
+  if(el.dataset.dir){p.direitos[el.dataset.dir]=el.value;touch();if(commit&&el.type==="date")render();return}
+  if(el.dataset.l&&el.dataset.id&&el.dataset.f){
+    const it=p[el.dataset.l].find(x=>x.id===el.dataset.id); if(!it)return;
+    it[el.dataset.f]=el.value; touch();
+    if(S.tab==="orcamento")updateBudget();
+    if(commit&&(el.tagName==="SELECT"||el.type==="date"))render();
+  }
+}
+document.addEventListener("input",e=>onField(e,false));
+document.addEventListener("change",e=>{
+  if(e.target.id==="projSel"){S.cur=e.target.value;saveUI();render();return}
+  if(e.target.dataset.a==="stepsel"){S.step=Number(e.target.value);saveUI();render();return}
+  if(e.target.type==="checkbox")return;
+  onField(e,true);
+});
+document.getElementById("btnNew").onclick=()=>projectForm(null,true);
+document.getElementById("btnEdit").onclick=()=>cur()&&projectForm(cur(),false);
+
+/* ============ BACKUP ============ */
+function stamp(){const d=new Date();return iso(d)+"_"+String(d.getHours()).padStart(2,"0")+"h"+String(d.getMinutes()).padStart(2,"0")}
+function buildHTML(){
+  const head=[],body=[];
+  document.querySelectorAll("[data-app]").forEach(el=>{
+    let h;
+    if(el.id==="dados")h='<script type="application/json" id="dados" data-app>'+JSON.stringify({savedAt:Date.now(),projects:S.projects}).replace(/</g,"\\u003c")+"<"+"/script>";
+    else if(el.tagName==="MAIN")h='<main data-app><div class="wrap" id="view"></div></main>';
+    else if(el.id=="modal")h='<div class="modal" id="modal" role="dialog" aria-modal="true" data-app><div class="card" id="modalBody"></div></div>';
+    else if(el.id=="toast")h='<div class="toast" id="toast" data-app></div>';
+    else h=el.outerHTML;
+    (/^(TITLE|META|LINK|STYLE)$/.test(el.tagName)?head:body).push(h);
+  });
+  return '<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'+head.join("\n")+'</head><body>'+body.join("\n")+'</body></html>';
+}
+async function offerFile(filename,data,mime){
+  try{
+    const dl=window.claude&&window.claude.use?await window.claude.use("downloads"):null;
+    if(dl){await dl.save({filename,data});toast("Arquivo salvo");return}
+  }catch(e){if(e&&(e.code==="declined"||e.code==="rate_limited"))return;console.warn(e)}
+  try{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([data],{type:mime}));a.download=filename;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},2000);toast("Download iniciado")}
+  catch(e){toast("Não consegui baixar aqui")}
+}
+function backupModal(){
+  const n=Object.keys(S.projects).length;
+  openModal(`<h3>Backup</h3><p class="muted">${n} projeto(s) neste guia. ${cloud?"Seus dados estão salvos na nuvem da sua conta.":"Seus dados estão salvos só neste navegador — faça backup de vez em quando."}</p>
+  <div class="bk"><div><b>Baixar o guia com meus dados</b><br><small class="muted">Um arquivo .html que abre em qualquer navegador já preenchido, mesmo sem internet. Alterações feitas nele ficam salvas naquele navegador.</small></div><button class="btn sm" data-a="dlhtml">Baixar .html</button></div>
+  <div class="bk"><div><b>Baixar backup</b><br><small class="muted">Um arquivo .json com todos os projetos. Guarde no Drive ou no computador.</small></div><button class="btn sm" data-a="dljson">Baixar .json</button></div>
+  <div class="bk"><div><b>Restaurar backup</b><br><small class="muted">Escolha um arquivo .json de backup. Projetos com o mesmo nome interno são substituídos; os outros são mantidos.</small><br><input type="file" id="bkfile" accept=".json,application/json" style="margin-top:8px;max-width:100%"></div></div>
+  <div style="display:flex;justify-content:flex-end;margin-top:10px"><button class="btn soft" data-a="mclose">Fechar</button></div>`);
+  document.getElementById("bkfile").onchange=e=>{
+    const f=e.target.files&&e.target.files[0]; if(!f)return;
+    const rd=new FileReader();
+    rd.onload=()=>{
+      let data; try{data=JSON.parse(rd.result)}catch(_){toast("Arquivo inválido");return}
+      const projs=data&&data.projects?data.projects:data;
+      const list=projs&&typeof projs==="object"?Object.values(projs).filter(p=>p&&p.id&&p.nome):[];
+      if(!list.length){toast("Nenhum projeto encontrado no arquivo");return}
+      openModal(`<h3>Restaurar ${list.length} projeto(s)?</h3><p>${list.map(p=>esc(p.nome)).join(", ")}</p><p class="muted">Projetos iguais que já estão no guia serão substituídos pela versão do backup.</p><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px"><button class="btn soft" data-a="mclose">Cancelar</button><button class="btn" id="rsYes">Restaurar</button></div>`);
+      document.getElementById("rsYes").onclick=()=>{list.forEach(p=>{S.projects[p.id]=normalize(JSON.parse(JSON.stringify(p)));touch(p.id)});if(!S.projects[S.cur])S.cur=list[0].id;saveUI();closeModal();render();toast("Backup restaurado")};
+    };
+    rd.readAsText(f);
+  };
+}
+document.getElementById("btnBackup").onclick=backupModal;
+
+/* ============ INÍCIO ============ */
+(function boot(){
+  let cache=lsGet(LS_KEY), local=null, emb=null;
+  if(cache&&typeof cache==="object")local=cache.v===2?cache:{savedAt:0,projects:cache};
+  try{emb=JSON.parse(document.getElementById("dados").textContent||"null")}catch(e){}
+  const src=(emb&&emb.projects&&(!local||!Object.keys(local.projects||{}).length||(emb.savedAt||0)>(local.savedAt||0)))?emb:local;
+  if(src&&src.projects)Object.values(src.projects).forEach(p=>{if(p&&p.id)S.projects[p.id]=normalize(p)});
+  savedAt=src?src.savedAt||0:0;
+  const ui=lsGet(LS_UI)||{}; Object.assign(S,{cur:ui.cur,tab:ui.tab||"painel",step:ui.step||0,edFilter:ui.edFilter||"todos"});
+  if(!TABS.find(x=>x[0]===S.tab))S.tab="painel";
+  if(!S.projects[S.cur])S.cur=Object.keys(S.projects)[0]||null;
+  render(); initCloud();
+})();
+</script></body></html>
